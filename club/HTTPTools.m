@@ -12,7 +12,7 @@
 
 @implementation HTTPTools
 
-static NSString *domain = @"http://42.96.144.219/" ;
+static NSString *domain = @"http://42.96.144.219/statusnetadmin/index.php/" ;
 
 + (NSDictionary *) sendRequestUri:(NSString *)uri Params:(NSDictionary *)params {
     
@@ -73,7 +73,7 @@ static NSString *domain = @"http://42.96.144.219/" ;
         return jsonData ;
     }else {
         NSLog(@"response failure: %d", [urlResponse statusCode]);
-        return nil ;
+        return jsonData ;
     }
     
 }

@@ -47,13 +47,13 @@
         [alertView show];
         return ;
     }
-    if(self.usernameField.text == nil || [@"" isEqualToString:self.passwordField.text]){
+    if(self.passwordField.text == nil || [@"" isEqualToString:self.passwordField.text]){
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"密码不能为空！" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
         return ;
     }
     //提交请求
-    NSDictionary *ret = [HTTPTools sendRequestUri:@"/statusnetadmin/index.php/api/auth" Params:[NSDictionary dictionaryWithObjectsAndKeys:self.usernameField.text,@"username",self.passwordField.text, @"password", nil]] ;
+    NSDictionary *ret = [HTTPTools sendRequestUri:@"/api/auth" Params:[NSDictionary dictionaryWithObjectsAndKeys:self.usernameField.text,@"username",self.passwordField.text, @"password", nil]] ;
     
     if(ret != nil){
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@", ret] message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];

@@ -10,6 +10,8 @@
 
 @interface SignUpController : UIViewController <UITextFieldDelegate>
 
+@property (nonatomic, retain) IBOutlet UITextField *emailField;
+
 @property (nonatomic, retain) IBOutlet UITextField *usernameField;
 
 @property (nonatomic, retain) IBOutlet UITextField *passwordField;
