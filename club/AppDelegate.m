@@ -7,18 +7,35 @@
 //
 
 #import "AppDelegate.h"
-
-#import "ViewController.h"
+#import "LoginController.h"
+#import "SignUpController.h"
+#import "Define.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
+    [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade] ;
+    
+    //初始化投注页面
+    self.navController = [[UINavigationController alloc] init] ;
+    [self.navController setNavigationBarHidden:YES animated:NO];
+    LoginController *loginController = nil ;
+    if(isIPhone5){
+        loginController = [[LoginController alloc] initWithNibName:@"LoginController_iphone5" bundle:nil];
+    }else{
+        loginController = [[LoginController alloc] initWithNibName:@"LoginController" bundle:nil];
+    }
+    self.window.rootViewController = loginController;
+    [self.navController pushViewController:loginController animated:YES] ;
+    
+    //显示首页
+    self.window.rootViewController = self.navController ;
     [self.window makeKeyAndVisible];
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -47,6 +64,30 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)gotoSignUpPage
+{
+    NSLog(@"Goto SignUp Page Start") ;
+    SignUpController *signUpController = nil ;
+    if(isIPhone5){
+        signUpController = [[SignUpController alloc] initWithNibName:@"SignUpController_iphone5" bundle:nil];
+    }else{
+        signUpController = [[SignUpController alloc] initWithNibName:@"SignUpController" bundle:nil];
+    }
+    [self.navController pushViewController:signUpController animated:YES] ;
+    NSLog(@"Goto SignUp Page End") ;
+}
+
+- (void)gotoLastPage
+{
+    NSLog(@"Goto Last Page Start") ;
+    for(int i = 0; i < self.navController.viewControllers.count; i++){
+        UIViewController *viewController = [self.navController.viewControllers objectAtIndex:i] ;
+        NSLog(@"#### %@", [viewController class]) ;
+    }
+    [self.navController popViewControllerAnimated:YES];
+    NSLog(@"Goto Last Page End") ;
 }
 
 @end
