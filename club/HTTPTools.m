@@ -14,7 +14,7 @@
 
 static NSString *domain = @"http://42.96.144.219/statusnetadmin/index.php/" ;
 
-+ (NSDictionary *) sendRequestUri:(NSString *)uri Params:(NSDictionary *)params {
++ (NSString *) sendRequestUri:(NSString *)uri Params:(NSDictionary *)params {
     
     NSString *urlString = [NSString stringWithFormat:@"%@%@", domain, uri] ;
     
@@ -66,14 +66,12 @@ static NSString *domain = @"http://42.96.144.219/statusnetadmin/index.php/" ;
     
     NSString *result = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     
-    NSDictionary *jsonData = [result objectFromJSONString];
-    
     if([urlResponse statusCode] >= 200 && [urlResponse statusCode] <300){
         NSLog(@"response success: %d %@", [urlResponse statusCode], result);
-        return jsonData ;
+        return result ;
     }else {
         NSLog(@"response failure: %d", [urlResponse statusCode]);
-        return jsonData ;
+        return result ;
     }
     
 }

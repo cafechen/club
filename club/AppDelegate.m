@@ -9,9 +9,12 @@
 #import "AppDelegate.h"
 #import "LoginController.h"
 #import "SignUpController.h"
+#import "IndexController.h"
 #import "Define.h"
 
 @implementation AppDelegate
+
+@synthesize imageCacheList ;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -19,6 +22,7 @@
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade] ;
     
     //初始化投注页面
+    /*
     self.navController = [[UINavigationController alloc] init] ;
     [self.navController setNavigationBarHidden:YES animated:NO];
     LoginController *loginController = nil ;
@@ -27,8 +31,21 @@
     }else{
         loginController = [[LoginController alloc] initWithNibName:@"LoginController" bundle:nil];
     }
-    self.window.rootViewController = loginController;
-    [self.navController pushViewController:loginController animated:YES] ;
+    */
+    
+    self.imageCacheList = [[NSMutableArray alloc] init] ;
+    
+    self.navController = [[UINavigationController alloc] init] ;
+    [self.navController setNavigationBarHidden:YES animated:NO];
+    IndexController *indexController = nil ;
+    if(isIPhone5){
+        indexController = [[IndexController alloc] initWithNibName:@"IndexController_iphone5" bundle:nil];
+    }else{
+        indexController = [[IndexController alloc] initWithNibName:@"IndexController" bundle:nil];
+    }
+    
+    self.window.rootViewController = indexController;
+    [self.navController pushViewController:indexController animated:YES] ;
     
     //显示首页
     self.window.rootViewController = self.navController ;
@@ -77,6 +94,19 @@
     }
     [self.navController pushViewController:signUpController animated:YES] ;
     NSLog(@"Goto SignUp Page End") ;
+}
+
+- (void)gotoIndexPage
+{
+    NSLog(@"Goto Index Page Start") ;
+    IndexController *indexController = nil ;
+    if(isIPhone5){
+        indexController = [[IndexController alloc] initWithNibName:@"IndexController_iphone5" bundle:nil];
+    }else{
+        indexController = [[IndexController alloc] initWithNibName:@"IndexController" bundle:nil];
+    }
+    [self.navController pushViewController:indexController animated:YES] ;
+    NSLog(@"Goto Index Page End") ;
 }
 
 - (void)gotoLastPage

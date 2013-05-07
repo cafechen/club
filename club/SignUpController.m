@@ -9,6 +9,7 @@
 #import "HTTPTools.h"
 #import "AppDelegate.h"
 #import "SignUpController.h"
+#import "JSONKit.h"
 
 @interface SignUpController ()
 
@@ -98,7 +99,9 @@
     }
     
     //提交请求
-    NSDictionary *ret = [HTTPTools sendRequestUri:@"/api/reg" Params:[NSDictionary dictionaryWithObjectsAndKeys:self.emailField.text,@"email",self.usernameField.text,@"nickname",self.passwordField.text, @"password", nil]] ;
+    NSString *response = [HTTPTools sendRequestUri:@"/api/reg" Params:[NSDictionary dictionaryWithObjectsAndKeys:self.emailField.text,@"email",self.usernameField.text,@"nickname",self.passwordField.text, @"password", nil]] ;
+    
+    NSDictionary *ret = [response objectFromJSONString] ;
     
     if(ret != nil){
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@", ret] message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];

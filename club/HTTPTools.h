@@ -10,7 +10,7 @@
 
 @interface HTTPTools : NSObject
 
-+ (NSDictionary *) sendRequestUri:(NSString *)uri Params:(NSDictionary *)params ;
++ (NSString *) sendRequestUri:(NSString *)uri Params:(NSDictionary *)params ;
 
 + (void) describeDictionary:(NSDictionary *)dict ;
 

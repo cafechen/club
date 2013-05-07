@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "HTTPTools.h"
 #import "LoginController.h"
+#import "JSONKit.h"
 
 @interface LoginController ()
 
@@ -53,7 +54,9 @@
         return ;
     }
     //提交请求
-    NSDictionary *ret = [HTTPTools sendRequestUri:@"/api/auth" Params:[NSDictionary dictionaryWithObjectsAndKeys:self.usernameField.text,@"username",self.passwordField.text, @"password", nil]] ;
+    NSString *response = [HTTPTools sendRequestUri:@"/api/auth" Params:[NSDictionary dictionaryWithObjectsAndKeys:self.usernameField.text,@"username",self.passwordField.text, @"password", nil]] ;
+    
+    NSDictionary *ret = [response objectFromJSONString];
     
     if(ret != nil){
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@", ret] message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];

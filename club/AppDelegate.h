@@ -13,8 +13,10 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) UINavigationController *navController;
+@property (nonatomic, retain) NSMutableArray *imageCacheList;
 
 - (void)gotoSignUpPage ;
 - (void)gotoLastPage ;
+- (void)gotoIndexPage ;
 
 @end
