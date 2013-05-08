@@ -67,7 +67,7 @@ static NSString *domain = @"http://42.96.144.219/statusnetadmin/index.php/" ;
     NSString *result = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     
     if([urlResponse statusCode] >= 200 && [urlResponse statusCode] <300){
-        NSLog(@"response success: %d %@", [urlResponse statusCode], result);
+        //NSLog(@"response success: %d %@", [urlResponse statusCode], result);
         return result ;
     }else {
         NSLog(@"response failure: %d", [urlResponse statusCode]);

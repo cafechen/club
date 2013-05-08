@@ -141,6 +141,11 @@
 		04B0CC7A17392DBD00052084 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0CC7917392DBD00052084 /* Menu.m */; };
 		04B0CC7C17392E7100052084 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B0CC7B17392E7100052084 /* blank.png */; };
 		04B0CC7F173931A700052084 /* Cache.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0CC7E173931A700052084 /* Cache.m */; };
+		04DD7AD5173A2E9B0028273C /* NewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD7AD3173A2E9B0028273C /* NewsController.m */; };
+		04DD7AD6173A2E9B0028273C /* NewsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD7AD4173A2E9B0028273C /* NewsController.xib */; };
+		04DD7AD8173A2EBF0028273C /* NewsController_iphone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD7AD7173A2EBF0028273C /* NewsController_iphone5.xib */; };
+		04DD7ADC173A34F80028273C /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD7ADA173A34F80028273C /* NewsCell.m */; };
+		04DD7ADD173A34F80028273C /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD7ADB173A34F80028273C /* NewsCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -293,6 +298,13 @@
 		04B0CC7B17392E7100052084 /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
 		04B0CC7D173931A700052084 /* Cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cache.h; sourceTree = "<group>"; };
 		04B0CC7E173931A700052084 /* Cache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cache.m; sourceTree = "<group>"; };
+		04DD7AD2173A2E9B0028273C /* NewsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsController.h; sourceTree = "<group>"; };
+		04DD7AD3173A2E9B0028273C /* NewsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsController.m; sourceTree = "<group>"; };
+		04DD7AD4173A2E9B0028273C /* NewsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsController.xib; sourceTree = "<group>"; };
+		04DD7AD7173A2EBF0028273C /* NewsController_iphone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsController_iphone5.xib; sourceTree = "<group>"; };
+		04DD7AD9173A34F80028273C /* NewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell.h; sourceTree = "<group>"; };
+		04DD7ADA173A34F80028273C /* NewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell.m; sourceTree = "<group>"; };
+		04DD7ADB173A34F80028273C /* NewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,6 +397,10 @@
 				04B0CB87173925CE00052084 /* IndexController.m */,
 				04B0CB88173925CE00052084 /* IndexController.xib */,
 				04B0CB8B173925FA00052084 /* IndexController_iphone5.xib */,
+				04DD7AD2173A2E9B0028273C /* NewsController.h */,
+				04DD7AD3173A2E9B0028273C /* NewsController.m */,
+				04DD7AD4173A2E9B0028273C /* NewsController.xib */,
+				04DD7AD7173A2EBF0028273C /* NewsController_iphone5.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -519,6 +535,9 @@
 		04B0CB9517392D2600052084 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				04DD7AD9173A34F80028273C /* NewsCell.h */,
+				04DD7ADA173A34F80028273C /* NewsCell.m */,
+				04DD7ADB173A34F80028273C /* NewsCell.xib */,
 				04B0CC0617392D3C00052084 /* MenuCell.h */,
 				04B0CC0717392D3C00052084 /* MenuCell.m */,
 				04B0CC0817392D3C00052084 /* MenuCell.xib */,
@@ -706,6 +725,9 @@
 				04B0CB8C173925FA00052084 /* IndexController_iphone5.xib in Resources */,
 				04B0CC7617392D3C00052084 /* MenuCell.xib in Resources */,
 				04B0CC7C17392E7100052084 /* blank.png in Resources */,
+				04DD7AD6173A2E9B0028273C /* NewsController.xib in Resources */,
+				04DD7AD8173A2EBF0028273C /* NewsController_iphone5.xib in Resources */,
+				04DD7ADD173A34F80028273C /* NewsCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,6 +750,8 @@
 				04B0CC7517392D3C00052084 /* MenuCell.m in Sources */,
 				04B0CC7A17392DBD00052084 /* Menu.m in Sources */,
 				04B0CC7F173931A700052084 /* Cache.m in Sources */,
+				04DD7AD5173A2E9B0028273C /* NewsController.m in Sources */,
+				04DD7ADC173A34F80028273C /* NewsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

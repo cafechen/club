@@ -51,11 +51,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.listData = [self getLists];
+    self.tableData = [self getTableLists];
     [self.tableView reloadData];
 }
 
-- (NSMutableArray *)getLists
+- (NSMutableArray *)getTableLists
 {
     
     NSMutableArray *result = [[NSMutableArray alloc] init];
@@ -102,7 +102,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
-    return [self.listData count] ;
+    return [self.tableData count] ;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -114,23 +114,19 @@
     
     NSUInteger row = [indexPath row];
     
-    Menu *menu = (Menu *)[self.listData objectAtIndex:row];
-    
-    NSLog(@"#### %@", menu.menuGroupId) ;
+    Menu *menu = (Menu *)[self.tableData objectAtIndex:row];
     
     NSString *response = [HTTPTools sendRequestUri:@"/api/getgrouplist" Params:[NSDictionary dictionaryWithObjectsAndKeys:menu.menuGroupId, @"id",nil]] ;
     
     NSArray *jsonArray = [response objectFromJSONString];
-    
-    NSLog(@"#### %@", jsonArray) ;
     
     menu.menuArray = [[NSMutableArray alloc] init];
     
     for(int i = 0; i < jsonArray.count; i++){
         Menu *gm = [[Menu alloc] init];
         NSDictionary *info = [jsonArray objectAtIndex:i] ;
-        gm.menuGroupId = [info objectForKey: @"group_id"];
-        gm.menuName = [info objectForKey: @"nickname"];
+        gm.menuGroupId = [info objectForKey: @"id"];
+        gm.menuName = @"" ; //[info objectForKey: @"nickname"];
         gm.menuContent = [info objectForKey: @"fullname"];
         gm.menuPic = [info objectForKey: @"mini_logo"];
         if((NSNull *)gm.menuPic == [NSNull null]){
@@ -151,24 +147,15 @@
     
     static NSString *TableSampleIdentifier = @"MenuCellIdentifier";
     
-    static BOOL nibsRegistered = NO;
-    
-    if (!nibsRegistered) {
-        UINib *nib = [UINib nibWithNibName:@"MenuCell" bundle:nil];
-        [tableView registerNib:nib forCellReuseIdentifier:TableSampleIdentifier];
-        nibsRegistered = YES;
-    }
-    
     MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:
                       TableSampleIdentifier];
     if (cell == nil) {
-        cell = [[MenuCell alloc]
-                 initWithStyle:UITableViewCellStyleDefault
-                 reuseIdentifier:TableSampleIdentifier];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MenuCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
     
     NSUInteger row = [indexPath row];
-    Menu *m = (Menu *)[self.listData objectAtIndex:row];
+    Menu *m = (Menu *)[self.tableData objectAtIndex:row];
     cell.menuTitle = [NSString stringWithFormat:@"%@", m.menuName] ;
 
     if(![@"" isEqualToString: m.menuPic] && m.menuPic != nil){
@@ -242,8 +229,6 @@
 
 - (void) downloadImageAWActionSheetCell: (NSArray *)data
 {
-    NSLog(@"data size %@", data) ;
-    
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
     
     for(int i = 0; i < appDelegate.imageCacheList.count; i++){
@@ -259,7 +244,6 @@
     AWActionSheetCell *cell = [data objectAtIndex:1] ;
     [[cell iconView] setImage:[UIImage imageNamed:@"Icon.png"]];
     loadImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[data objectAtIndex:0]]]];
-    NSLog(@"#### %@", loadImage) ;
     if(loadImage == nil){
         return ;
     }
@@ -286,7 +270,7 @@
 	_reloading = NO;
 	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     //[_footerRefreshView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-	self.listData = [self getLists];
+	self.tableData = [self getTableLists];
     [self.tableView reloadData];
 }
 
@@ -380,7 +364,10 @@
 
 -(void)DidTapOnItemAtIndex:(NSInteger)index
 {
-    
+    Menu *m = [self.currMenu.menuArray objectAtIndex:index];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+    appDelegate.currNewsGroupId = [m.menuGroupId copy] ;
+    [appDelegate gotoNewsPage] ;
 }
 
 @end

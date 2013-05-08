@@ -10,11 +10,13 @@
 #import "LoginController.h"
 #import "SignUpController.h"
 #import "IndexController.h"
+#import "NewsController.h"
 #import "Define.h"
 
 @implementation AppDelegate
 
 @synthesize imageCacheList ;
+@synthesize currNewsGroupId ;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -107,6 +109,19 @@
     }
     [self.navController pushViewController:indexController animated:YES] ;
     NSLog(@"Goto Index Page End") ;
+}
+
+- (void)gotoNewsPage
+{
+    NSLog(@"Goto News Page Start") ;
+    NewsController *newsController = nil ;
+    if(isIPhone5){
+        newsController = [[NewsController alloc] initWithNibName:@"NewsController_iphone5" bundle:nil];
+    }else{
+        newsController = [[NewsController alloc] initWithNibName:@"NewsController" bundle:nil];
+    }
+    [self.navController pushViewController:newsController animated:YES] ;
+    NSLog(@"Goto News Page End") ;
 }
 
 - (void)gotoLastPage

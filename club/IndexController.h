@@ -18,7 +18,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) NSMutableArray *listData ;
+@property (nonatomic, retain) NSMutableArray *tableData ;
 @property (nonatomic, retain) Menu *currMenu ;
 
 - (void) reloadTableViewDataSource;
