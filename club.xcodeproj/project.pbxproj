@@ -146,6 +146,9 @@
 		04DD7AD8173A2EBF0028273C /* NewsController_iphone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD7AD7173A2EBF0028273C /* NewsController_iphone5.xib */; };
 		04DD7ADC173A34F80028273C /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD7ADA173A34F80028273C /* NewsCell.m */; };
 		04DD7ADD173A34F80028273C /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD7ADB173A34F80028273C /* NewsCell.xib */; };
+		ADB6C368173BED2F000FE3B6 /* NewsDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB6C366173BED2F000FE3B6 /* NewsDetailController.m */; };
+		ADB6C369173BED2F000FE3B6 /* NewsDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB6C367173BED2F000FE3B6 /* NewsDetailController.xib */; };
+		ADB6C36B173BED4B000FE3B6 /* NewsDetailController_iphone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB6C36A173BED4B000FE3B6 /* NewsDetailController_iphone5.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -305,6 +308,10 @@
 		04DD7AD9173A34F80028273C /* NewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell.h; sourceTree = "<group>"; };
 		04DD7ADA173A34F80028273C /* NewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell.m; sourceTree = "<group>"; };
 		04DD7ADB173A34F80028273C /* NewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
+		ADB6C365173BED2F000FE3B6 /* NewsDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailController.h; sourceTree = "<group>"; };
+		ADB6C366173BED2F000FE3B6 /* NewsDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailController.m; sourceTree = "<group>"; };
+		ADB6C367173BED2F000FE3B6 /* NewsDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsDetailController.xib; sourceTree = "<group>"; };
+		ADB6C36A173BED4B000FE3B6 /* NewsDetailController_iphone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsDetailController_iphone5.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -401,6 +408,10 @@
 				04DD7AD3173A2E9B0028273C /* NewsController.m */,
 				04DD7AD4173A2E9B0028273C /* NewsController.xib */,
 				04DD7AD7173A2EBF0028273C /* NewsController_iphone5.xib */,
+				ADB6C365173BED2F000FE3B6 /* NewsDetailController.h */,
+				ADB6C366173BED2F000FE3B6 /* NewsDetailController.m */,
+				ADB6C367173BED2F000FE3B6 /* NewsDetailController.xib */,
+				ADB6C36A173BED4B000FE3B6 /* NewsDetailController_iphone5.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -728,6 +739,8 @@
 				04DD7AD6173A2E9B0028273C /* NewsController.xib in Resources */,
 				04DD7AD8173A2EBF0028273C /* NewsController_iphone5.xib in Resources */,
 				04DD7ADD173A34F80028273C /* NewsCell.xib in Resources */,
+				ADB6C369173BED2F000FE3B6 /* NewsDetailController.xib in Resources */,
+				ADB6C36B173BED4B000FE3B6 /* NewsDetailController_iphone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,6 +765,7 @@
 				04B0CC7F173931A700052084 /* Cache.m in Sources */,
 				04DD7AD5173A2E9B0028273C /* NewsController.m in Sources */,
 				04DD7ADC173A34F80028273C /* NewsCell.m in Sources */,
+				ADB6C368173BED2F000FE3B6 /* NewsDetailController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

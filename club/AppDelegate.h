@@ -15,10 +15,12 @@
 @property (strong, nonatomic) UINavigationController *navController;
 @property (nonatomic, retain) NSMutableArray *imageCacheList;
 @property (nonatomic, retain) NSString *currNewsGroupId;
+@property (nonatomic, retain) NSDictionary *currNewsDetail;
 
 - (void)gotoSignUpPage ;
 - (void)gotoLastPage ;
 - (void)gotoIndexPage ;
 - (void)gotoNewsPage ;
+- (void)gotoNewsDetailPage ;
 
 @end

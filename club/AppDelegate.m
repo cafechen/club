@@ -11,6 +11,7 @@
 #import "SignUpController.h"
 #import "IndexController.h"
 #import "NewsController.h"
+#import "NewsDetailController.h"
 #import "Define.h"
 
 @implementation AppDelegate
@@ -122,6 +123,19 @@
     }
     [self.navController pushViewController:newsController animated:YES] ;
     NSLog(@"Goto News Page End") ;
+}
+
+- (void)gotoNewsDetailPage
+{
+    NSLog(@"Goto News Detail Page Start") ;
+    NewsDetailController *newsDetailController = nil ;
+    if(isIPhone5){
+        newsDetailController = [[NewsDetailController alloc] initWithNibName:@"NewsDetailController_iphone5" bundle:nil];
+    }else{
+        newsDetailController = [[NewsDetailController alloc] initWithNibName:@"NewsDetailController" bundle:nil];
+    }
+    [self.navController pushViewController:newsDetailController animated:YES] ;
+    NSLog(@"Goto News Detail Page End") ;
 }
 
 - (void)gotoLastPage

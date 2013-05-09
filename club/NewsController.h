@@ -12,7 +12,6 @@
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray *tableData ;
-@property (nonatomic, retain) NSMutableArray *tableViewCellsArray ;
 
 - (IBAction) gotoLastPageButtonAction:(id)sender;
 

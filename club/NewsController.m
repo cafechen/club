@@ -11,6 +11,7 @@
 #import "HTTPTools.h"
 #import "JSONKit.h"
 #import "NewsCell.h"
+#import "Cache.h"
 
 @interface NewsController ()
 
@@ -23,7 +24,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.tableViewCellsArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -33,8 +33,6 @@
     [super viewDidLoad] ;
     
     self.tableData = [self getTableLists];
-    
-    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:NO];
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -88,23 +86,20 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    // 該行要顯示的內容
-    NSLog(@"#### heightForRowAtIndexPath") ;
-    if(self.tableViewCellsArray.count == 0){
-        NSLog(@"#### NULL") ;
-        return 202 ;
-    }else{
-        NewsCell *cell = [self.tableViewCellsArray objectAtIndex:indexPath.row] ;
-        NSLog(@"#### %f", cell.contentHeight) ;
-        return cell.contentHeight + 96;
-    }
-    
+    return 80 ;
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView
   willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+    
+    NSUInteger row = [indexPath row];
+    
+    appDelegate.currNewsDetail = (NSDictionary *)[self.tableData objectAtIndex:row];
+    
+    [appDelegate gotoNewsDetailPage] ;
+    
+    return nil ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -123,23 +118,25 @@
         cell = [nib objectAtIndex:0];
     }
     
-    [cell.textLabel setContentMode:UIViewContentModeRight] ;
+    if([dict objectForKey:@"pic"] != nil && ![@"" isEqualToString: [dict objectForKey:@"pic"]]){
+        
+        NSArray *data = [NSArray arrayWithObjects:[dict objectForKey:@"pic"], cell, nil];
+        
+        [NSThread detachNewThreadSelector:@selector(downloadImageAndCache:) toTarget:self withObject:data] ;
+        
+        //cell.menuImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:m.menuPic]]] ;
+    }else{
+        cell.pic = [UIImage imageNamed:@"Icon.png"] ;
+    }
     
-    NSURL *url = [NSURL URLWithString:[dict objectForKey:@"pic"]];
-    
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-    
-    cell.body = [dict objectForKey:@"content"];
-    cell.pic = image ;
     cell.title = [dict objectForKey:@"title"];
-    cell.myTableView = tableView;
-    [self.tableViewCellsArray addObject:cell] ;
     
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath
 {
+    
 }
 
 
@@ -156,5 +153,34 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
 }
+
+- (void) downloadImageAndCache: (NSArray *)data
+{
+    NSLog(@"data size %d %@", data.count, [data objectAtIndex:0]) ;
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+    
+    for(int i = 0; i < appDelegate.imageCacheList.count; i++){
+        Cache *cache = [appDelegate.imageCacheList objectAtIndex:i];
+        if([cache.imageUrl isEqualToString:[data objectAtIndex:0]]){
+            NewsCell *cell = [data objectAtIndex:1] ;
+            cell.pic = cache.imageCache ;
+            return ;
+        }
+    }
+    
+    NewsCell *cell = [data objectAtIndex:1] ;
+    [cell setPic:[UIImage imageNamed:@"Icon.png"]];
+    UIImage *loadImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[data objectAtIndex:0]]]];
+    if(loadImage == nil){
+        return ;
+    }
+    cell.pic = loadImage ;
+    Cache *newCache = [[Cache alloc] init] ;
+    newCache.imageCache = [loadImage copy] ;
+    newCache.imageUrl = [data objectAtIndex:0] ;
+    [appDelegate.imageCacheList addObject:newCache];
+}
+
 
 @end

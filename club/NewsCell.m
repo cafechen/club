@@ -11,9 +11,7 @@
 @implementation NewsCell
 
 @synthesize pic;
-@synthesize body;
 @synthesize title;
-@synthesize contentHeight;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -45,16 +43,7 @@
     }
 }
 
--(void)setBody:(NSString *) b {
-    if (![b isEqualToString:body]) {
-        body = [b copy];
-        NSData *data = [body dataUsingEncoding:NSUTF8StringEncoding];
-        [self.bodyView loadData:data MIMEType:@"application/xhtml+xml" textEncodingName:@"utf-8" baseURL:[NSURL URLWithString:@"http://42.96.144.219/"]];
-        self.bodyView.delegate = self ;
-        [self.bodyView loadHTMLString:body baseURL:[NSURL URLWithString:nil]];
-    }
-}
-
+/*
 - (void)webViewDidFinishLoad:(UIWebView *) webView
 {
     CGSize actualSize = [webView sizeThatFits:CGSizeZero];
@@ -64,6 +53,6 @@
     self.contentHeight = newFrame.size.height ;
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, newFrame.size.height + 96) ;
 }
-
+*/
 
 @end
