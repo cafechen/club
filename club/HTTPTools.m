@@ -224,7 +224,8 @@ static NSString *snDomain = @"http://42.96.144.219/statusnet/index.php/" ;
     [body appendData:[[NSString stringWithFormat:@"%@", userId] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
     //image
-    NSData *imageData = UIImagePNGRepresentation(image);
+    UIImage *smallImage = [HTTPTools getSmallImage:image] ;
+    NSData *imageData = UIImagePNGRepresentation(smallImage);
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"media\"; filename=\"%@\"\r\n",@"1898d833.png"] dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES]];
     [body appendData:[[NSString stringWithFormat:@"Content-Type: image/png\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[NSData dataWithData:imageData]];
@@ -314,7 +315,8 @@ static NSString *snDomain = @"http://42.96.144.219/statusnet/index.php/" ;
     [body appendData:[[NSString stringWithFormat:@"%@", username] dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES]];
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES]];
     //image
-    NSData *imageData = UIImagePNGRepresentation(image);
+    UIImage *smallImage = [HTTPTools getSmallImage:image] ;
+    NSData *imageData = UIImagePNGRepresentation(smallImage);
     NSProcessInfo *processInfo=[NSProcessInfo processInfo];
     NSString *filename = [NSString stringWithFormat:@"%@.png", [processInfo globallyUniqueString]] ;
     NSLog(@"filename %@", filename) ;
@@ -340,6 +342,80 @@ static NSString *snDomain = @"http://42.96.144.219/statusnet/index.php/" ;
         NSLog(@"response failure: %d", [urlResponse statusCode]);
         return NO ;
     }
+}
+
++ (UIImage *)getSmallImage:(UIImage *)bigImage
+{
+    UIImage *smallImage = bigImage ;
+    do{
+        NSData *imageData = UIImagePNGRepresentation(smallImage) ;
+        NSLog(@"Image Size [%d]", imageData.length) ;
+        if(imageData.length > 1024*150){
+            smallImage = [HTTPTools getImageFromImage:smallImage Scale:0.9] ;
+        }else{
+            break ;
+        }
+    }while(true) ;
+    return smallImage ;
+}
+
++ (UIImage *)getImageFromImage:(UIImage *)bigImage Scale:(float) scale
+{
+    
+    CGSize targetSize = CGSizeMake(bigImage.size.width*scale,  bigImage.size.height*scale);
+    UIImage *sourceImage = bigImage;
+    UIImage *newImage = nil;
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    CGFloat targetWidth = targetSize.width;
+    CGFloat targetHeight = targetSize.height;
+    CGFloat scaleFactor = 0.0;
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
+    
+    if (CGSizeEqualToSize(imageSize, targetSize) == NO)
+    {
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+        
+        if (widthFactor > heightFactor)
+            scaleFactor = widthFactor; // scale to fit height
+        else
+            scaleFactor = heightFactor; // scale to fit width
+        scaledWidth  = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+        
+        // center the image
+        if (widthFactor > heightFactor)
+        {
+            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.4;
+        }
+        else
+            if (widthFactor < heightFactor)
+            {
+                thumbnailPoint.x = (targetWidth - scaledWidth) * 0.4;
+            }
+    }
+    
+    UIGraphicsBeginImageContext(targetSize); // this will crop
+    
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.origin = thumbnailPoint;
+    thumbnailRect.size.width  = scaledWidth;
+    thumbnailRect.size.height = scaledHeight;
+    
+    [sourceImage drawInRect:thumbnailRect];
+    
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    if(newImage == nil)
+        NSLog(@"could not scale image");
+    
+    //pop the context to get back to the default
+    UIGraphicsEndImageContext();
+    return newImage;
+    
 }
 
 + (void) describeDictionary: (NSDictionary *)dict

@@ -35,4 +35,6 @@
                     Password: (NSString *) password
                        Image: (UIImage *) image;
 
++ (UIImage *)getSmallImage:(UIImage *)bigImage ;
+
 @end
