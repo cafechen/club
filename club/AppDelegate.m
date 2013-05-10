@@ -24,8 +24,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade] ;
     
+    self.imageCacheList = [[NSMutableArray alloc] init] ;
+    
+    self.isLogin = NO ;
+    
     //初始化投注页面
-    /*
     self.navController = [[UINavigationController alloc] init] ;
     [self.navController setNavigationBarHidden:YES animated:NO];
     LoginController *loginController = nil ;
@@ -34,10 +37,8 @@
     }else{
         loginController = [[LoginController alloc] initWithNibName:@"LoginController" bundle:nil];
     }
-    */
     
-    self.imageCacheList = [[NSMutableArray alloc] init] ;
-    
+    /*
     self.navController = [[UINavigationController alloc] init] ;
     [self.navController setNavigationBarHidden:YES animated:NO];
     IndexController *indexController = nil ;
@@ -46,9 +47,10 @@
     }else{
         indexController = [[IndexController alloc] initWithNibName:@"IndexController" bundle:nil];
     }
+    */
     
-    self.window.rootViewController = indexController;
-    [self.navController pushViewController:indexController animated:YES] ;
+    self.window.rootViewController = loginController;
+    [self.navController pushViewController:loginController animated:YES] ;
     
     //显示首页
     self.window.rootViewController = self.navController ;
@@ -136,6 +138,15 @@
     }
     [self.navController pushViewController:newsDetailController animated:YES] ;
     NSLog(@"Goto News Detail Page End") ;
+}
+
+- (void) gotoRootPage
+{
+    NSLog(@"Goto Root Page Start") ;
+    [self.navController popToRootViewControllerAnimated:YES];
+    UIViewController *currController = [self.navController.viewControllers lastObject] ;
+    [currController viewDidLoad] ;
+    NSLog(@"Goto Root Page End") ;
 }
 
 - (void)gotoLastPage

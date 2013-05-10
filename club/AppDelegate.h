@@ -16,11 +16,17 @@
 @property (nonatomic, retain) NSMutableArray *imageCacheList;
 @property (nonatomic, retain) NSString *currNewsGroupId;
 @property (nonatomic, retain) NSDictionary *currNewsDetail;
+@property (nonatomic, readwrite) BOOL isLogin;
+@property (nonatomic, retain) NSString *username;
+@property (nonatomic, retain) NSString *password;
+@property (nonatomic, retain) NSString *authorId;
+@property (nonatomic, retain) NSString *nickname;
 
 - (void)gotoSignUpPage ;
 - (void)gotoLastPage ;
 - (void)gotoIndexPage ;
 - (void)gotoNewsPage ;
 - (void)gotoNewsDetailPage ;
+- (void) gotoRootPage ;
 
 @end

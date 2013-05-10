@@ -18,4 +18,12 @@
 
 @property (nonatomic, retain) IBOutlet UITextField *rpasswordField;
 
+@property (nonatomic, readwrite) BOOL isAutoLogin;
+
+@property (nonatomic, readwrite) BOOL isSavePasswd;
+
+@property (retain, nonatomic) IBOutlet UIButton *savePasswdButton;
+
+@property (retain, nonatomic) IBOutlet UIButton *autoLoginButton;
+
 @end

@@ -199,6 +199,17 @@
     }
 }
 
+- (IBAction) submitLogoutButtonAction:(id)sender
+{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+    appDelegate.isLogin = NO ;
+    //取消自动登陆
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:[NSString stringWithFormat:@"%d", NO] forKey:@"AutoLogin"] ;
+    [userDefault synchronize];
+    [appDelegate gotoRootPage] ;
+}
+
 - (void) downloadImageMenuCell: (NSArray *)data
 {
     NSLog(@"data size %d %@", data.count, [data objectAtIndex:0]) ;

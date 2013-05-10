@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041FF2ED173C6FF100D1B9A5 /* messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 041FF2EC173C6FF100D1B9A5 /* messages.plist */; };
+		041FF2F0173C70C400D1B9A5 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 041FF2EF173C70C400D1B9A5 /* Message.m */; };
 		048E5CAB172CD843000CED62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048E5CAA172CD843000CED62 /* UIKit.framework */; };
 		048E5CAD172CD843000CED62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048E5CAC172CD843000CED62 /* Foundation.framework */; };
 		048E5CAF172CD843000CED62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048E5CAE172CD843000CED62 /* CoreGraphics.framework */; };
@@ -152,6 +154,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		041FF2EC173C6FF100D1B9A5 /* messages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = messages.plist; sourceTree = "<group>"; };
+		041FF2EE173C70C400D1B9A5 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		041FF2EF173C70C400D1B9A5 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		048E5CA7172CD843000CED62 /* club.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = club.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048E5CAA172CD843000CED62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		048E5CAC172CD843000CED62 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -385,6 +390,7 @@
 				048E5CBC172CD843000CED62 /* Default.png */,
 				048E5CBE172CD843000CED62 /* Default@2x.png */,
 				048E5CC0172CD843000CED62 /* Default-568h@2x.png */,
+				041FF2EC173C6FF100D1B9A5 /* messages.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -531,6 +537,8 @@
 		048E5DAA172D1743000CED62 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				041FF2EE173C70C400D1B9A5 /* Message.h */,
+				041FF2EF173C70C400D1B9A5 /* Message.m */,
 				04B0CB8D17392A1D00052084 /* AWActionSheet.h */,
 				04B0CB8E17392A1D00052084 /* AWActionSheet.m */,
 				04B0CB8F17392A1D00052084 /* EGORefreshTableHeaderView.h */,
@@ -741,6 +749,7 @@
 				04DD7ADD173A34F80028273C /* NewsCell.xib in Resources */,
 				ADB6C369173BED2F000FE3B6 /* NewsDetailController.xib in Resources */,
 				ADB6C36B173BED4B000FE3B6 /* NewsDetailController_iphone5.xib in Resources */,
+				041FF2ED173C6FF100D1B9A5 /* messages.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,6 +775,7 @@
 				04DD7AD5173A2E9B0028273C /* NewsController.m in Sources */,
 				04DD7ADC173A34F80028273C /* NewsCell.m in Sources */,
 				ADB6C368173BED2F000FE3B6 /* NewsDetailController.m in Sources */,
+				041FF2F0173C70C400D1B9A5 /* Message.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,5 +23,6 @@
 
 - (void) reloadTableViewDataSource;
 - (void) doneLoadingTableViewData;
+- (IBAction) submitLogoutButtonAction:(id)sender ;
 
 @end
