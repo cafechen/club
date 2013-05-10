@@ -15,6 +15,7 @@
 #import "Define.h"
 #import "ShareController.h"
 #import "TLineController.h"
+#import "HomeController.h"
 
 @implementation AppDelegate
 
@@ -31,31 +32,27 @@
     self.isLogin = NO ;
     
     //初始化投注页面
-    self.navController = [[UINavigationController alloc] init] ;
-    [self.navController setNavigationBarHidden:YES animated:NO];
+    self.navController1 = [[UINavigationController alloc] init] ;
+    self.navController2 = [[UINavigationController alloc] init] ;
+    self.navController3 = [[UINavigationController alloc] init] ;
+    self.navController4 = [[UINavigationController alloc] init] ;
+    [self.navController1 setNavigationBarHidden:YES animated:NO];
+    [self.navController2 setNavigationBarHidden:YES animated:NO];
+    [self.navController3 setNavigationBarHidden:YES animated:NO];
+    [self.navController4 setNavigationBarHidden:YES animated:NO];
     LoginController *loginController = nil ;
+    
     if(isIPhone5){
         loginController = [[LoginController alloc] initWithNibName:@"LoginController_iphone5" bundle:nil];
     }else{
         loginController = [[LoginController alloc] initWithNibName:@"LoginController" bundle:nil];
     }
     
-    /*
-    self.navController = [[UINavigationController alloc] init] ;
-    [self.navController setNavigationBarHidden:YES animated:NO];
-    IndexController *indexController = nil ;
-    if(isIPhone5){
-        indexController = [[IndexController alloc] initWithNibName:@"IndexController_iphone5" bundle:nil];
-    }else{
-        indexController = [[IndexController alloc] initWithNibName:@"IndexController" bundle:nil];
-    }
-    */
-    
     self.window.rootViewController = loginController;
-    [self.navController pushViewController:loginController animated:YES] ;
+    [self.navController1 pushViewController:loginController animated:YES] ;
     
     //显示首页
-    self.window.rootViewController = self.navController ;
+    self.window.rootViewController = self.navController1 ;
     [self.window makeKeyAndVisible];
     
     [self.window makeKeyAndVisible];
@@ -99,20 +96,51 @@
     }else{
         signUpController = [[SignUpController alloc] initWithNibName:@"SignUpController" bundle:nil];
     }
-    [self.navController pushViewController:signUpController animated:YES] ;
+    [self.navController1 pushViewController:signUpController animated:YES] ;
+    
+    self.window.rootViewController = self.navController1;
     NSLog(@"Goto SignUp Page End") ;
 }
 
 - (void)gotoIndexPage
 {
     NSLog(@"Goto Index Page Start") ;
+    
+    //index包含三个页面 index tline home
+    
     IndexController *indexController = nil ;
+    
     if(isIPhone5){
         indexController = [[IndexController alloc] initWithNibName:@"IndexController_iphone5" bundle:nil];
     }else{
         indexController = [[IndexController alloc] initWithNibName:@"IndexController" bundle:nil];
     }
-    [self.navController pushViewController:indexController animated:YES] ;
+    [self.navController2 pushViewController:indexController animated:YES] ;
+    
+    TLineController *tlineController = nil ;
+    if(isIPhone5){
+        tlineController = [[TLineController alloc] initWithNibName:@"TLineController_iphone5" bundle:nil];
+    }else{
+        tlineController = [[TLineController alloc] initWithNibName:@"TLineController" bundle:nil];
+    }
+    [self.navController3 pushViewController:tlineController animated:YES] ;
+    
+    HomeController *homeController = nil ;
+    if(isIPhone5){
+        homeController = [[HomeController alloc] initWithNibName:@"HomeController_iphone5" bundle:nil];
+    }else{
+        homeController = [[HomeController alloc] initWithNibName:@"HomeController" bundle:nil];
+    }
+    [self.navController4 pushViewController:homeController animated:YES] ;
+    
+    self.tabBarController = [[UITabBarController alloc] init];
+    
+    self.tabBarController.viewControllers = @[self.navController2, self.navController3, self.navController4];
+    
+    self.window.rootViewController = self.tabBarController;
+    
+    //[self.navController pushViewController:tabBarController animated:YES] ;
+    
     NSLog(@"Goto Index Page End") ;
 }
 
@@ -125,7 +153,9 @@
     }else{
         newsController = [[NewsController alloc] initWithNibName:@"NewsController" bundle:nil];
     }
-    [self.navController pushViewController:newsController animated:YES] ;
+    [self.navController2 pushViewController:newsController animated:YES] ;
+    
+    self.window.rootViewController = self.tabBarController;
     NSLog(@"Goto News Page End") ;
 }
 
@@ -138,7 +168,9 @@
     }else{
         shareController = [[ShareController alloc] initWithNibName:@"ShareController" bundle:nil];
     }
-    [self.navController pushViewController:shareController animated:YES] ;
+    [self.navController3 pushViewController:shareController animated:YES] ;
+    
+    self.window.rootViewController = self.tabBarController;
     NSLog(@"Goto Share Page End") ;
 }
 
@@ -151,7 +183,9 @@
     }else{
         tlineController = [[TLineController alloc] initWithNibName:@"TLineController" bundle:nil];
     }
-    [self.navController pushViewController:tlineController animated:YES] ;
+    [self.navController2 pushViewController:tlineController animated:YES] ;
+    
+    self.window.rootViewController = self.tabBarController;
     NSLog(@"Goto TLine Page End") ;
 }
 
@@ -164,33 +198,60 @@
     }else{
         newsDetailController = [[NewsDetailController alloc] initWithNibName:@"NewsDetailController" bundle:nil];
     }
-    [self.navController pushViewController:newsDetailController animated:YES] ;
+    [self.navController2 pushViewController:newsDetailController animated:YES] ;
+    
+    self.window.rootViewController = self.tabBarController;
     NSLog(@"Goto News Detail Page End") ;
 }
 
-- (void) gotoRootPage
+- (void) gotoLoginPage
 {
-    NSLog(@"Goto Root Page Start") ;
-    [self.navController popToRootViewControllerAnimated:YES];
-    UIViewController *currController = [self.navController.viewControllers lastObject] ;
-    [currController viewDidLoad] ;
-    NSLog(@"Goto Root Page End") ;
+    NSLog(@"Goto Login Page Start") ;
+    LoginController *loginController = nil ;
+    if(isIPhone5){
+        loginController = [[LoginController alloc] initWithNibName:@"LoginController_iphone5" bundle:nil];
+    }else{
+        loginController = [[LoginController alloc] initWithNibName:@"LoginController" bundle:nil];
+    }
+    [self.navController1 pushViewController:loginController animated:YES] ;
+    
+    self.window.rootViewController = self.navController1;
+    NSLog(@"Goto Login Page End") ;
 }
 
-- (void)gotoLastPage
+- (void)gotoLastPage1
 {
     NSLog(@"Goto Last Page Start") ;
-    [self.navController popViewControllerAnimated:YES];
+    [self.navController1 popViewControllerAnimated:YES];
+    
+    self.window.rootViewController = self.navController1;
+    NSLog(@"Goto Last Page End") ;
+}
+
+- (void)gotoLastPage2
+{
+    NSLog(@"Goto Last Page Start") ;
+    [self.navController2 popViewControllerAnimated:YES];
+    self.window.rootViewController = self.tabBarController;
+    NSLog(@"Goto Last Page End") ;
+}
+
+- (void)gotoLastPage3
+{
+    NSLog(@"Goto Last Page Start") ;
+    [self.navController3 popViewControllerAnimated:YES];
+    self.window.rootViewController = self.tabBarController;
     NSLog(@"Goto Last Page End") ;
 }
 
 - (void)gotoLastTLPage
 {
-    NSLog(@"Goto Last Page Start") ;
-    [self.navController popViewControllerAnimated:YES];
-    UIViewController *currController = [self.navController.viewControllers lastObject] ;
+    NSLog(@"Goto Last TL Page Start") ;
+    [self.navController3 popViewControllerAnimated:YES];
+    self.window.rootViewController = self.tabBarController;
+    UIViewController *currController = [self.navController3.viewControllers lastObject] ;
     [currController viewDidLoad] ;
-    NSLog(@"Goto Last Page End") ;
+    NSLog(@"Goto Last TL Page End") ;
 }
 
 @end

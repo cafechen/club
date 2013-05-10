@@ -26,4 +26,13 @@
                                 UserId: (NSString *)userId
                                  Image: (UIImage *) image;
 
++ (NSString *) sendAuthHttpUrl:(NSString *)urlString
+                        Method:(NSString *)methodString
+                      UserName: (NSString *)username
+                      Password: (NSString *) password;
+
++ (BOOL ) updateProfileImage: (NSString *) username
+                    Password: (NSString *) password
+                       Image: (UIImage *) image;
+
 @end

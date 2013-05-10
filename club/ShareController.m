@@ -23,6 +23,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = NSLocalizedString(@"社交分享", @"社交分享");
+        self.tabBarItem.image = [UIImage imageNamed:@"public"];
     }
     return self;
 }
@@ -87,6 +89,7 @@
 
 #pragma mark –
 #pragma mark Camera View Delegate Methods
+
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
@@ -199,7 +202,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 - (IBAction) gotoLastPageButtonAction:(id)sender
 {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
-    [appDelegate gotoLastPage] ;
+    [appDelegate gotoLastPage3] ;
 }
 
 

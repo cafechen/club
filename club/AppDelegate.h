@@ -12,7 +12,11 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) UINavigationController *navController;
+@property (strong, nonatomic) UINavigationController *navController1;
+@property (strong, nonatomic) UINavigationController *navController2;
+@property (strong, nonatomic) UINavigationController *navController3;
+@property (strong, nonatomic) UINavigationController *navController4;
+@property (strong, nonatomic) UITabBarController *tabBarController;
 @property (nonatomic, retain) NSMutableArray *imageCacheList;
 @property (nonatomic, retain) NSString *currNewsGroupId;
 @property (nonatomic, retain) NSDictionary *currNewsDetail;
@@ -23,13 +27,15 @@
 @property (nonatomic, retain) NSString *nickname;
 
 - (void)gotoSignUpPage ;
-- (void)gotoLastPage ;
+- (void)gotoLastPage1 ;
+- (void)gotoLastPage2 ;
+- (void)gotoLastPage3 ;
 - (void)gotoIndexPage ;
 - (void)gotoNewsPage ;
 - (void)gotoNewsDetailPage ;
-- (void)gotoRootPage ;
 - (void)gotoSharePage ;
 - (void)gotoTLinePage ;
 - (void)gotoLastTLPage ;
+- (void)gotoLoginPage ;
 
 @end

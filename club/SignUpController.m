@@ -135,7 +135,7 @@
 - (IBAction) gotoLastPageButtonAction:(id)sender
 {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
-    [appDelegate gotoLastPage] ;
+    [appDelegate gotoLastPage1] ;
 }
 
 - (IBAction) submitSignUpButtonAction:(id)sender

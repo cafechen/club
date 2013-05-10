@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShareController : UIViewController <UITableViewDelegate,UITableViewDataSource,UIPickerViewDataSource,UINavigationControllerDelegate, UIImagePickerControllerDelegate,UITextViewDelegate>
+@interface ShareController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate,UITextViewDelegate>
 
 @property (retain, nonatomic) IBOutlet UIImageView *imageView;
 

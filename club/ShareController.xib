@@ -43,9 +43,10 @@
 					<object class="IBUIImageView" id="396408391">
 						<reference key="NSNextResponder" ref="145511733"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrameSize">{320, 480}</string>
+						<string key="NSFrame">{{0, 44}, {320, 480}}</string>
 						<reference key="NSSuperview" ref="145511733"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="359915638"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -95,7 +96,7 @@
 						<string key="NSFrame">{{10, 204}, {55, 44}}</string>
 						<reference key="NSSuperview" ref="145511733"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="68123849"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -152,7 +153,7 @@
 						<string key="NSFrameSize">{320, 44}</string>
 						<reference key="NSSuperview" ref="145511733"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="359915638"/>
+						<reference key="NSNextKeyView" ref="396408391"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<array key="IBUIItems">
@@ -178,9 +179,10 @@
 					<object class="IBUIImageView" id="159078841">
 						<reference key="NSNextResponder" ref="145511733"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{60, 260}, {200, 200}}</string>
+						<string key="NSFrame">{{80, 245}, {160, 160}}</string>
 						<reference key="NSSuperview" ref="145511733"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -323,8 +325,8 @@
 							<reference ref="452405482"/>
 							<reference ref="246078044"/>
 							<reference ref="359915638"/>
-							<reference ref="159078841"/>
 							<reference ref="396408391"/>
+							<reference ref="159078841"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
