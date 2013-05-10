@@ -27,6 +27,9 @@
 - (void)gotoIndexPage ;
 - (void)gotoNewsPage ;
 - (void)gotoNewsDetailPage ;
-- (void) gotoRootPage ;
+- (void)gotoRootPage ;
+- (void)gotoSharePage ;
+- (void)gotoTLinePage ;
+- (void)gotoLastTLPage ;
 
 @end

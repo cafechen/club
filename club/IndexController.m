@@ -85,6 +85,13 @@
         }
     }
     
+    //添加社交分享
+    Menu *m = [[Menu alloc] init];
+    m.menuName = @"社交分享";
+    m.menuGroupId = @"0";
+    m.menuPic = @"" ;
+    [result addObject:m] ;
+    
     return result ;
 }
 
@@ -115,6 +122,31 @@
     NSUInteger row = [indexPath row];
     
     Menu *menu = (Menu *)[self.tableData objectAtIndex:row];
+    
+    //这里根据group为0来判断是否是自己加的列表
+    if([@"0" isEqualToString:menu.menuGroupId]){
+        if([@"社交分享" isEqualToString:menu.menuName]){
+            menu.menuArray = [[NSMutableArray alloc] init];
+            //个人中心
+            Menu *gm1 = [[Menu alloc] init];
+            gm1.menuGroupId = @"-1"; //个人中心用-1来标识
+            gm1.menuName = @"";
+            gm1.menuContent = @"个人中心";
+            gm1.menuPic = @"";
+            //社交分享
+            Menu *gm2 = [[Menu alloc] init];
+            gm2.menuGroupId = @"-2"; //社交分享用-2来标识
+            gm2.menuName = @"";
+            gm2.menuContent = @"社交分享";
+            gm2.menuPic = @"";
+            [menu.menuArray addObject:gm1];
+            [menu.menuArray addObject:gm2];
+        }
+        //如果是自己加的列表就不用走网络请求了
+        self.currMenu = menu ;
+        [self showAWSheet];
+        return nil;
+    }
     
     NSString *response = [HTTPTools sendRequestUri:@"/api/getgrouplist" Params:[NSDictionary dictionaryWithObjectsAndKeys:menu.menuGroupId, @"id",nil]] ;
     
@@ -377,8 +409,25 @@
 {
     Menu *m = [self.currMenu.menuArray objectAtIndex:index];
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
-    appDelegate.currNewsGroupId = [m.menuGroupId copy] ;
-    [appDelegate gotoNewsPage] ;
+    
+    //判断是否是自己加的列表
+    int groupId = [m.menuGroupId intValue] ;
+    
+    if(groupId > 0){
+        appDelegate.currNewsGroupId = [m.menuGroupId copy] ;
+        [appDelegate gotoNewsPage] ;
+    }else{
+        switch (groupId) {
+            case -1:
+                [appDelegate gotoTLinePage];
+                break;
+            case -2:
+                [appDelegate gotoTLinePage];
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 @end

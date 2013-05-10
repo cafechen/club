@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		041FF2ED173C6FF100D1B9A5 /* messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 041FF2EC173C6FF100D1B9A5 /* messages.plist */; };
 		041FF2F0173C70C400D1B9A5 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 041FF2EF173C70C400D1B9A5 /* Message.m */; };
+		041FF2F4173C7BD700D1B9A5 /* ShareController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041FF2F2173C7BD600D1B9A5 /* ShareController.m */; };
+		041FF2F5173C7BD700D1B9A5 /* ShareController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041FF2F3173C7BD600D1B9A5 /* ShareController.xib */; };
+		041FF2F7173C7C5200D1B9A5 /* ShareController_iphone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041FF2F6173C7C5200D1B9A5 /* ShareController_iphone5.xib */; };
+		041FF2FB173C7E7100D1B9A5 /* ShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041FF2F9173C7E7100D1B9A5 /* ShareCell.m */; };
+		041FF2FC173C7E7100D1B9A5 /* ShareCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041FF2FA173C7E7100D1B9A5 /* ShareCell.xib */; };
+		041FF300173C7EA600D1B9A5 /* TLineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041FF2FE173C7EA400D1B9A5 /* TLineController.m */; };
+		041FF301173C7EA600D1B9A5 /* TLineController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041FF2FF173C7EA500D1B9A5 /* TLineController.xib */; };
+		041FF304173C802300D1B9A5 /* Share.m in Sources */ = {isa = PBXBuildFile; fileRef = 041FF303173C802300D1B9A5 /* Share.m */; };
+		041FF306173C85D300D1B9A5 /* TLineController_iphone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041FF305173C85D300D1B9A5 /* TLineController_iphone5.xib */; };
+		041FF309173C8CE700D1B9A5 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 041FF308173C8CE600D1B9A5 /* NSString+URLEncoding.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		041FF30C173C90EF00D1B9A5 /* CommonFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 041FF30B173C90EE00D1B9A5 /* CommonFunc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		048E5CAB172CD843000CED62 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048E5CAA172CD843000CED62 /* UIKit.framework */; };
 		048E5CAD172CD843000CED62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048E5CAC172CD843000CED62 /* Foundation.framework */; };
 		048E5CAF172CD843000CED62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048E5CAE172CD843000CED62 /* CoreGraphics.framework */; };
@@ -157,6 +168,23 @@
 		041FF2EC173C6FF100D1B9A5 /* messages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = messages.plist; sourceTree = "<group>"; };
 		041FF2EE173C70C400D1B9A5 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		041FF2EF173C70C400D1B9A5 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		041FF2F1173C7BD500D1B9A5 /* ShareController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareController.h; sourceTree = "<group>"; };
+		041FF2F2173C7BD600D1B9A5 /* ShareController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareController.m; sourceTree = "<group>"; };
+		041FF2F3173C7BD600D1B9A5 /* ShareController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareController.xib; sourceTree = "<group>"; };
+		041FF2F6173C7C5200D1B9A5 /* ShareController_iphone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareController_iphone5.xib; sourceTree = "<group>"; };
+		041FF2F8173C7E7100D1B9A5 /* ShareCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareCell.h; sourceTree = "<group>"; };
+		041FF2F9173C7E7100D1B9A5 /* ShareCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareCell.m; sourceTree = "<group>"; };
+		041FF2FA173C7E7100D1B9A5 /* ShareCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareCell.xib; sourceTree = "<group>"; };
+		041FF2FD173C7EA400D1B9A5 /* TLineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLineController.h; sourceTree = "<group>"; };
+		041FF2FE173C7EA400D1B9A5 /* TLineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLineController.m; sourceTree = "<group>"; };
+		041FF2FF173C7EA500D1B9A5 /* TLineController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TLineController.xib; sourceTree = "<group>"; };
+		041FF302173C802300D1B9A5 /* Share.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Share.h; sourceTree = "<group>"; };
+		041FF303173C802300D1B9A5 /* Share.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Share.m; sourceTree = "<group>"; };
+		041FF305173C85D300D1B9A5 /* TLineController_iphone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TLineController_iphone5.xib; sourceTree = "<group>"; };
+		041FF307173C8CE600D1B9A5 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		041FF308173C8CE600D1B9A5 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
+		041FF30A173C90EE00D1B9A5 /* CommonFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonFunc.h; sourceTree = "<group>"; };
+		041FF30B173C90EE00D1B9A5 /* CommonFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonFunc.m; sourceTree = "<group>"; };
 		048E5CA7172CD843000CED62 /* club.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = club.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048E5CAA172CD843000CED62 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		048E5CAC172CD843000CED62 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -398,6 +426,10 @@
 		048E5CD2172D044E000CED62 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				041FF2FD173C7EA400D1B9A5 /* TLineController.h */,
+				041FF2FE173C7EA400D1B9A5 /* TLineController.m */,
+				041FF2FF173C7EA500D1B9A5 /* TLineController.xib */,
+				041FF305173C85D300D1B9A5 /* TLineController_iphone5.xib */,
 				048E5CCD172D0445000CED62 /* LoginController.h */,
 				048E5CCE172D0445000CED62 /* LoginController.m */,
 				048E5CCF172D0445000CED62 /* LoginController.xib */,
@@ -418,6 +450,10 @@
 				ADB6C366173BED2F000FE3B6 /* NewsDetailController.m */,
 				ADB6C367173BED2F000FE3B6 /* NewsDetailController.xib */,
 				ADB6C36A173BED4B000FE3B6 /* NewsDetailController_iphone5.xib */,
+				041FF2F1173C7BD500D1B9A5 /* ShareController.h */,
+				041FF2F2173C7BD600D1B9A5 /* ShareController.m */,
+				041FF2F3173C7BD600D1B9A5 /* ShareController.xib */,
+				041FF2F6173C7C5200D1B9A5 /* ShareController_iphone5.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -537,6 +573,10 @@
 		048E5DAA172D1743000CED62 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				041FF30A173C90EE00D1B9A5 /* CommonFunc.h */,
+				041FF30B173C90EE00D1B9A5 /* CommonFunc.m */,
+				041FF307173C8CE600D1B9A5 /* NSString+URLEncoding.h */,
+				041FF308173C8CE600D1B9A5 /* NSString+URLEncoding.m */,
 				041FF2EE173C70C400D1B9A5 /* Message.h */,
 				041FF2EF173C70C400D1B9A5 /* Message.m */,
 				04B0CB8D17392A1D00052084 /* AWActionSheet.h */,
@@ -554,6 +594,9 @@
 		04B0CB9517392D2600052084 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				041FF2F8173C7E7100D1B9A5 /* ShareCell.h */,
+				041FF2F9173C7E7100D1B9A5 /* ShareCell.m */,
+				041FF2FA173C7E7100D1B9A5 /* ShareCell.xib */,
 				04DD7AD9173A34F80028273C /* NewsCell.h */,
 				04DD7ADA173A34F80028273C /* NewsCell.m */,
 				04DD7ADB173A34F80028273C /* NewsCell.xib */,
@@ -571,6 +614,8 @@
 				04B0CC7E173931A700052084 /* Cache.m */,
 				04B0CC7817392DBC00052084 /* Menu.h */,
 				04B0CC7917392DBD00052084 /* Menu.m */,
+				041FF302173C802300D1B9A5 /* Share.h */,
+				041FF303173C802300D1B9A5 /* Share.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -750,6 +795,11 @@
 				ADB6C369173BED2F000FE3B6 /* NewsDetailController.xib in Resources */,
 				ADB6C36B173BED4B000FE3B6 /* NewsDetailController_iphone5.xib in Resources */,
 				041FF2ED173C6FF100D1B9A5 /* messages.plist in Resources */,
+				041FF2F5173C7BD700D1B9A5 /* ShareController.xib in Resources */,
+				041FF2F7173C7C5200D1B9A5 /* ShareController_iphone5.xib in Resources */,
+				041FF2FC173C7E7100D1B9A5 /* ShareCell.xib in Resources */,
+				041FF301173C7EA600D1B9A5 /* TLineController.xib in Resources */,
+				041FF306173C85D300D1B9A5 /* TLineController_iphone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,6 +826,12 @@
 				04DD7ADC173A34F80028273C /* NewsCell.m in Sources */,
 				ADB6C368173BED2F000FE3B6 /* NewsDetailController.m in Sources */,
 				041FF2F0173C70C400D1B9A5 /* Message.m in Sources */,
+				041FF2F4173C7BD700D1B9A5 /* ShareController.m in Sources */,
+				041FF2FB173C7E7100D1B9A5 /* ShareCell.m in Sources */,
+				041FF300173C7EA600D1B9A5 /* TLineController.m in Sources */,
+				041FF304173C802300D1B9A5 /* Share.m in Sources */,
+				041FF309173C8CE700D1B9A5 /* NSString+URLEncoding.m in Sources */,
+				041FF30C173C90EF00D1B9A5 /* CommonFunc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

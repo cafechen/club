@@ -11,7 +11,19 @@
 @interface HTTPTools : NSObject
 
 + (NSString *) sendRequestUri:(NSString *)uri Params:(NSDictionary *)params ;
++ (NSString *) sendSNRequestUri:(NSString *)uri Params:(NSDictionary *)params ;
 
 + (void) describeDictionary:(NSDictionary *)dict ;
+
++ (BOOL ) sendMessageHttpUserName: (NSString *)username
+                         Password: (NSString *) password
+                           Status: (NSString *) status
+                           UserId: (NSString *)userId;
+
++ (BOOL ) sendMessageImageHttpUserName: (NSString *)username
+                              Password: (NSString *) password
+                                Status: (NSString *) status
+                                UserId: (NSString *)userId
+                                 Image: (UIImage *) image;
 
 @end

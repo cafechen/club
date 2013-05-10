@@ -13,6 +13,8 @@
 #import "NewsController.h"
 #import "NewsDetailController.h"
 #import "Define.h"
+#import "ShareController.h"
+#import "TLineController.h"
 
 @implementation AppDelegate
 
@@ -127,6 +129,32 @@
     NSLog(@"Goto News Page End") ;
 }
 
+- (void)gotoSharePage
+{
+    NSLog(@"Goto Share Page Start") ;
+    ShareController *shareController = nil ;
+    if(isIPhone5){
+        shareController = [[ShareController alloc] initWithNibName:@"ShareController_iphone5" bundle:nil];
+    }else{
+        shareController = [[ShareController alloc] initWithNibName:@"ShareController" bundle:nil];
+    }
+    [self.navController pushViewController:shareController animated:YES] ;
+    NSLog(@"Goto Share Page End") ;
+}
+
+- (void)gotoTLinePage
+{
+    NSLog(@"Goto TLine Page Start") ;
+    TLineController *tlineController = nil ;
+    if(isIPhone5){
+        tlineController = [[TLineController alloc] initWithNibName:@"TLineController_iphone5" bundle:nil];
+    }else{
+        tlineController = [[TLineController alloc] initWithNibName:@"TLineController" bundle:nil];
+    }
+    [self.navController pushViewController:tlineController animated:YES] ;
+    NSLog(@"Goto TLine Page End") ;
+}
+
 - (void)gotoNewsDetailPage
 {
     NSLog(@"Goto News Detail Page Start") ;
@@ -152,11 +180,16 @@
 - (void)gotoLastPage
 {
     NSLog(@"Goto Last Page Start") ;
-    for(int i = 0; i < self.navController.viewControllers.count; i++){
-        UIViewController *viewController = [self.navController.viewControllers objectAtIndex:i] ;
-        NSLog(@"#### %@", [viewController class]) ;
-    }
     [self.navController popViewControllerAnimated:YES];
+    NSLog(@"Goto Last Page End") ;
+}
+
+- (void)gotoLastTLPage
+{
+    NSLog(@"Goto Last Page Start") ;
+    [self.navController popViewControllerAnimated:YES];
+    UIViewController *currController = [self.navController.viewControllers lastObject] ;
+    [currController viewDidLoad] ;
     NSLog(@"Goto Last Page End") ;
 }
 
