@@ -274,6 +274,7 @@
 	//  should be calling your tableviews data source model to reload
 	//  put here just for demo
 	_reloading = YES;
+    [self viewDidLoad];
 }
 
 - (void)doneLoadingTableViewData{

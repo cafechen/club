@@ -93,7 +93,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     // 列寬
-    CGFloat contentWidth = 224; //self.tableView.frame.size.width;
+    CGFloat contentWidth = 204; //self.tableView.frame.size.width;
     // 用何種字體進行顯示
     UIFont *font = [UIFont systemFontOfSize:16];
     
@@ -128,7 +128,7 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // 列寬
-    CGFloat contentWidth = 224 ;
+    CGFloat contentWidth = 204 ;
     // 用何種字體進行顯示
     UIFont *font = [UIFont systemFontOfSize:16];
     
@@ -268,6 +268,89 @@
     return self.listData ;
 }
 
+-(void) reloadLists
+{
+    
+    NSString *urlString = nil ;
+    
+    urlString = [NSString stringWithFormat:@"/api/statuses/public_timeline.json"] ;
+    
+    NSString *response = [HTTPTools sendSNRequestUri:urlString Params:[NSDictionary dictionaryWithObjectsAndKeys:nil]] ;
+    
+    if(response == nil){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"网络异常，请检查网络！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        return ;
+    }
+    
+    NSArray *items = [response objectFromJSONString];
+    for(int i = 0; i < items.count; i++){
+        NSDictionary *item = [items objectAtIndex:i] ;
+        Share *share = [[Share alloc] init];
+        share.msgId = [item objectForKey: @"id"];
+        share.msgBody = [item objectForKey: @"text"];
+        share.msgTime = [item objectForKey:@"created_at"] ;
+        share.msgTime = [share.msgTime substringToIndex:19] ;
+        NSDictionary *user = [item objectForKey: @"user"];
+        share.msgActor = [user objectForKey: @"profile_image_url"];
+        share.msgTitle = [user objectForKey: @"name"];
+        share.msgUserId = [NSString stringWithFormat:@"%@", [user objectForKey: @"id"]];
+        
+        NSArray *attachs = [item objectForKey: @"attachments"];
+        if(attachs != nil && [attachs count] > 0){
+            NSDictionary *attach = [attachs objectAtIndex:0] ;
+            share.msgAttach = [attach objectForKey:@"url"] ;
+        }
+        
+        Share *latestShare = [self.listData objectAtIndex:0] ;
+        if([latestShare.msgId intValue] < [share.msgId intValue]){
+            [self.listData insertObject:share atIndex:0];
+        }
+    }
+}
+
+-(void) reloadOldLists
+{
+    if(listData.count == 0){
+        [self reloadLists] ;
+        return ;
+    }
+    
+    Share *oldestShare = [self.listData objectAtIndex:(self.listData.count - 1)] ;
+    
+    NSString *urlString = [NSString stringWithFormat:@"/api/statuses/public_timeline.json?max_id=%@&count=21", oldestShare.msgId] ;
+    
+    NSString *response = [HTTPTools sendSNRequestUri:urlString Params:[NSDictionary dictionaryWithObjectsAndKeys:nil]] ;
+    
+    if(response == nil){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"网络异常，请检查网络！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        return ;
+    }
+    
+    NSArray *items = [response objectFromJSONString];
+    for(int i = 1; i < items.count; i++){
+        NSDictionary *item = [items objectAtIndex:i] ;
+        Share *share = [[Share alloc] init];
+        share.msgId = [item objectForKey: @"id"];
+        share.msgBody = [item objectForKey: @"text"];
+        share.msgTime = [item objectForKey:@"created_at"] ;
+        share.msgTime = [share.msgTime substringToIndex:19] ;
+        NSDictionary *user = [item objectForKey: @"user"];
+        share.msgActor = [user objectForKey: @"profile_image_url"];
+        share.msgTitle = [user objectForKey: @"name"];
+        share.msgUserId = [NSString stringWithFormat:@"%@", [user objectForKey: @"id"]];
+        
+        NSArray *attachs = [item objectForKey: @"attachments"];
+        if(attachs != nil && [attachs count] > 0){
+            NSDictionary *attach = [attachs objectAtIndex:0] ;
+            share.msgAttach = [attach objectForKey:@"url"] ;
+        }
+        
+        [self.listData addObject:share];
+    }
+}
+
 + (void) describeDictionary: (NSDictionary *)dict
 {
     NSArray *keys;
@@ -347,9 +430,9 @@
 	//  put here just for demo
 	_reloading = YES;
     if(_reloadSite == 1){
-        //[self reloadLists];
+        [self reloadLists];
     }else{
-        //[self reloadOldLists];
+        [self reloadOldLists];
     }
 }
 
