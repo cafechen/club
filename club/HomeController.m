@@ -109,7 +109,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     // 列寬
-    CGFloat contentWidth = 204; //self.tableView.frame.size.width;
+    CGFloat contentWidth = 260; //self.tableView.frame.size.width;
     // 用何種字體進行顯示
     UIFont *font = [UIFont systemFontOfSize:16];
     
@@ -121,10 +121,14 @@
     
     // 這裏返回需要的高度
     
+    if(size.height > 80){
+        size.height = 80 ;
+    }
+    
     if(msg.msgAttach == nil || [@"" isEqualToString:msg.msgAttach]){
-        size.height = size.height  + 48 + 20 ;
+        size.height = size.height  + 80 + 20 ;
     }else{
-        size.height = size.height  + 48 + 20 + 100 ;
+        size.height = size.height  + 80 + 20 + 100 ;
     }
     
     return size.height;
@@ -139,7 +143,7 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // 列寬
-    CGFloat contentWidth = 204 ;
+    CGFloat contentWidth = 260 ;
     // 用何種字體進行顯示
     UIFont *font = [UIFont systemFontOfSize:16];
     
@@ -186,6 +190,10 @@
     attachRect.origin.y = rect.origin.y + rect.size.height + 20;
     attachRect.size.width = 80 ;
     attachRect.size.height = 80 ;
+    
+    if(size.height > 80){
+        size.height = 80 ;
+    }
     
     // 設置顯示榘形大小
     rect.size = size;
