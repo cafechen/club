@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Share.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -25,6 +26,7 @@
 @property (nonatomic, retain) NSString *authorId;
 @property (nonatomic, retain) NSString *nickname;
 @property (nonatomic, retain) NSString *currUserId;
+@property (nonatomic, retain) Share *currShare;
 
 - (void)gotoSignUpPage ;
 - (void)gotoLastPage1 ;
@@ -38,5 +40,6 @@
 - (void)gotoLastTLPage ;
 - (void)gotoLoginPage ;
 - (void)gotoPersionPage ;
+- (void)gotoShareDetailPage ;
 
 @end

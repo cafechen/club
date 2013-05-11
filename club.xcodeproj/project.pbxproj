@@ -223,6 +223,9 @@
 		ADC84959173DEDC4005DB08B /* PersionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC84957173DEDC4005DB08B /* PersionController.xib */; };
 		ADC8495B173DEDD9005DB08B /* PersionController_iphone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC8495A173DEDD8005DB08B /* PersionController_iphone5.xib */; };
 		ADC8495D173E0C46005DB08B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADC8495C173E0C46005DB08B /* QuartzCore.framework */; };
+		ADC84961173E418A005DB08B /* ShareDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC8495F173E4189005DB08B /* ShareDetailController.m */; };
+		ADC84962173E418A005DB08B /* ShareDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC84960173E4189005DB08B /* ShareDetailController.xib */; };
+		ADC84964173E41B7005DB08B /* ShareDetailController_iphone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC84963173E41B7005DB08B /* ShareDetailController_iphone5.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -469,6 +472,10 @@
 		ADC84957173DEDC4005DB08B /* PersionController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersionController.xib; sourceTree = "<group>"; };
 		ADC8495A173DEDD8005DB08B /* PersionController_iphone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersionController_iphone5.xib; sourceTree = "<group>"; };
 		ADC8495C173E0C46005DB08B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		ADC8495E173E4189005DB08B /* ShareDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareDetailController.h; sourceTree = "<group>"; };
+		ADC8495F173E4189005DB08B /* ShareDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareDetailController.m; sourceTree = "<group>"; };
+		ADC84960173E4189005DB08B /* ShareDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareDetailController.xib; sourceTree = "<group>"; };
+		ADC84963173E41B7005DB08B /* ShareDetailController_iphone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareDetailController_iphone5.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -586,6 +593,10 @@
 				0449B551173D0834006DDEE1 /* HomeController.m */,
 				0449B552173D0834006DDEE1 /* HomeController.xib */,
 				0449B555173D0895006DDEE1 /* HomeController_iphone5.xib */,
+				ADC8495E173E4189005DB08B /* ShareDetailController.h */,
+				ADC8495F173E4189005DB08B /* ShareDetailController.m */,
+				ADC84960173E4189005DB08B /* ShareDetailController.xib */,
+				ADC84963173E41B7005DB08B /* ShareDetailController_iphone5.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1046,6 +1057,8 @@
 				0449B556173D0895006DDEE1 /* HomeController_iphone5.xib in Resources */,
 				ADC84959173DEDC4005DB08B /* PersionController.xib in Resources */,
 				ADC8495B173DEDD9005DB08B /* PersionController_iphone5.xib in Resources */,
+				ADC84962173E418A005DB08B /* ShareDetailController.xib in Resources */,
+				ADC84964173E41B7005DB08B /* ShareDetailController_iphone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1080,6 +1093,7 @@
 				041FF30C173C90EF00D1B9A5 /* CommonFunc.m in Sources */,
 				0449B553173D0835006DDEE1 /* HomeController.m in Sources */,
 				ADC84958173DEDC4005DB08B /* PersionController.m in Sources */,
+				ADC84961173E418A005DB08B /* ShareDetailController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

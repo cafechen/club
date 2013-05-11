@@ -178,13 +178,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
         return ;
     }
     
-    if([self.textView.text length] > 70){
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"内容不能超过70个字！" message:nil delegate:self cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-        return ;
-    }
-    
     if(self.imageView.image == nil){
         [NSThread detachNewThreadSelector:@selector(showLoading) toTarget:self withObject:nil];
         if([HTTPTools sendMessageHttpUserName: appDelegate.username

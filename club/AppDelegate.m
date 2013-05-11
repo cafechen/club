@@ -17,6 +17,7 @@
 #import "TLineController.h"
 #import "HomeController.h"
 #import "PersionController.h"
+#import "ShareDetailController.h"
 #import "HTTPTools.h"
 #import "NSString+URLEncoding.h"
 
@@ -267,6 +268,21 @@
     
     self.window.rootViewController = self.tabBarController;
     NSLog(@"Goto Persion Detail Page End") ;
+}
+
+- (void)gotoShareDetailPage
+{
+    NSLog(@"Goto Share Detail Start") ;
+    ShareDetailController *shareDetailController = nil ;
+    if(isIPhone5){
+        shareDetailController = [[ShareDetailController alloc] initWithNibName:@"ShareDetailController_iphone5" bundle:nil];
+    }else{
+        shareDetailController = [[ShareDetailController alloc] initWithNibName:@"ShareDetailController" bundle:nil];
+    }
+    [self.navController3 pushViewController:shareDetailController animated:YES] ;
+    
+    self.window.rootViewController = self.tabBarController;
+    NSLog(@"Goto Share Detail Page End") ;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

@@ -113,9 +113,13 @@
 - (NSIndexPath *)tableView:(UITableView *)tableView
   willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //NSUInteger row = [indexPath row];
+    NSUInteger row = [indexPath row];
     
-    //Share *share = (Share *)[listData objectAtIndex:row];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+    
+    appDelegate.currShare = (Share *)[listData objectAtIndex:row];
+    
+    [appDelegate gotoShareDetailPage] ;
     
     return nil;
 }
