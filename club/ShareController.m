@@ -5,12 +5,12 @@
 //  Created by steven on 13-5-10.
 //  Copyright (c) 2013年 ibm. All rights reserved.
 //
-
+#import "Define.h"
 #import "AppDelegate.h"
 #import "ShareController.h"
 #import "NSString+URLEncoding.h"
-#import "HTTPTools.h"
 #import <QuartzCore/QuartzCore.h>
+#import "HTTPTools.h"
 
 @interface ShareController ()
 
@@ -36,6 +36,11 @@
     self.textView.text = @"" ;
     self.textView.layer.borderWidth =1.0;
     self.textView.layer.cornerRadius =5.0;
+    if(isIPhone5){
+        self.textView.frame = CGRectMake(10, 53, 300, 250) ;
+    }else{
+        self.textView.frame = CGRectMake(10, 53, 300, 220) ;
+    }
     
     self.imageView.image = nil ;
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;

@@ -206,7 +206,6 @@
 		04B0CB8C173925FA00052084 /* IndexController_iphone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0CB8B173925FA00052084 /* IndexController_iphone5.xib */; };
 		04B0CB9117392A1D00052084 /* AWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0CB8E17392A1D00052084 /* AWActionSheet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		04B0CB9217392A1D00052084 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0CB9017392A1D00052084 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		04B0CB9417392C5400052084 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B0CB9317392C5400052084 /* QuartzCore.framework */; };
 		04B0CC7517392D3C00052084 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0CC0717392D3C00052084 /* MenuCell.m */; };
 		04B0CC7617392D3C00052084 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B0CC0817392D3C00052084 /* MenuCell.xib */; };
 		04B0CC7A17392DBD00052084 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B0CC7917392DBD00052084 /* Menu.m */; };
@@ -223,6 +222,7 @@
 		ADC84958173DEDC4005DB08B /* PersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC84956173DEDC4005DB08B /* PersionController.m */; };
 		ADC84959173DEDC4005DB08B /* PersionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC84957173DEDC4005DB08B /* PersionController.xib */; };
 		ADC8495B173DEDD9005DB08B /* PersionController_iphone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC8495A173DEDD8005DB08B /* PersionController_iphone5.xib */; };
+		ADC8495D173E0C46005DB08B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADC8495C173E0C46005DB08B /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -445,7 +445,6 @@
 		04B0CB8E17392A1D00052084 /* AWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWActionSheet.m; sourceTree = "<group>"; };
 		04B0CB8F17392A1D00052084 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		04B0CB9017392A1D00052084 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
-		04B0CB9317392C5400052084 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		04B0CC0617392D3C00052084 /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		04B0CC0717392D3C00052084 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		04B0CC0817392D3C00052084 /* MenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
@@ -469,6 +468,7 @@
 		ADC84956173DEDC4005DB08B /* PersionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersionController.m; sourceTree = "<group>"; };
 		ADC84957173DEDC4005DB08B /* PersionController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersionController.xib; sourceTree = "<group>"; };
 		ADC8495A173DEDD8005DB08B /* PersionController_iphone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersionController_iphone5.xib; sourceTree = "<group>"; };
+		ADC8495C173E0C46005DB08B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -476,7 +476,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04B0CB9417392C5400052084 /* QuartzCore.framework in Frameworks */,
+				ADC8495D173E0C46005DB08B /* QuartzCore.framework in Frameworks */,
 				048E5CAB172CD843000CED62 /* UIKit.framework in Frameworks */,
 				048E5CAD172CD843000CED62 /* Foundation.framework in Frameworks */,
 				048E5CAF172CD843000CED62 /* CoreGraphics.framework in Frameworks */,
@@ -489,7 +489,7 @@
 		048E5C9E172CD843000CED62 = {
 			isa = PBXGroup;
 			children = (
-				04B0CB9317392C5400052084 /* QuartzCore.framework */,
+				ADC8495C173E0C46005DB08B /* QuartzCore.framework */,
 				048E5DA6172D0E8D000CED62 /* Icon@2x.png */,
 				048E5DA4172D0E89000CED62 /* Icon.png */,
 				048E5CB0172CD843000CED62 /* club */,
