@@ -21,10 +21,6 @@
 @implementation TLineController
 
 @synthesize listData;
-@synthesize selected;
-@synthesize tabName;
-@synthesize templateId;
-@synthesize classId;
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -61,7 +57,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = NSLocalizedString(@"社交分享", @"社交分享");
+        self.title = NSLocalizedString(@"大杂烩", @"大杂烩");
         self.tabBarItem.image = [UIImage imageNamed:@"public"];
     }
     return self;
@@ -151,7 +147,7 @@
     
     cell.attactment = nil;
     cell.avatar = nil;
-    cell.toPersion = NO ;
+    cell.toPersion = YES ;
     
     if(msg.msgActor != nil && ![@"" isEqualToString:msg.msgActor]){
         NSArray *data = [NSArray arrayWithObjects:msg.msgActor, cell, nil];

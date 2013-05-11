@@ -22,11 +22,6 @@
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray *listData ;
 
-@property (nonatomic, retain) NSString *selected ;
-@property (nonatomic, retain) NSString *tabName ;
-@property (nonatomic, retain) NSString *templateId ;
-@property (nonatomic, retain) NSString *classId ;
-
 - (IBAction) gotoLastPageButtonAction:(id)sender;
 - (IBAction) gotoSharePageButtonAction:(id)sender;
 - (void) reloadTableViewDataSource;

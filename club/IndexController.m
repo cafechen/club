@@ -342,7 +342,8 @@
 - (void)showAWSheet
 {
     AWActionSheet *sheet = [[AWActionSheet alloc] initwithIconSheetDelegate:self ItemCount:[self numberOfItemsInActionSheet]];
-    [sheet showInView:self.view];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+    [sheet showInView:appDelegate.window.rootViewController.view];
 }
 
 -(int)numberOfItemsInActionSheet

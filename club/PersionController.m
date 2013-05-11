@@ -84,7 +84,7 @@
     
     NSLog(@"#### %@", dict) ;
     
-    self.titleItem.title = [NSString stringWithFormat:@"%@的分享",[dict objectForKey: @"screen_name"]] ;
+    self.titleItem.title = [NSString stringWithFormat:@"%@的大杂烩",[dict objectForKey: @"screen_name"]] ;
     
     self.personName.text = [dict objectForKey: @"screen_name"] ;
     

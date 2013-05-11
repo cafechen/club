@@ -34,7 +34,7 @@
     
     self.isLogin = NO ;
     
-    //初始化投注页面
+    //初始化页面
     self.navController1 = [[UINavigationController alloc] init] ;
     self.navController2 = [[UINavigationController alloc] init] ;
     self.navController3 = [[UINavigationController alloc] init] ;
@@ -51,13 +51,10 @@
         loginController = [[LoginController alloc] initWithNibName:@"LoginController" bundle:nil];
     }
     
-    self.window.rootViewController = loginController;
     [self.navController1 pushViewController:loginController animated:YES] ;
     
     //显示首页
     self.window.rootViewController = self.navController1 ;
-    [self.window makeKeyAndVisible];
-    
     [self.window makeKeyAndVisible];
     
     return YES;
