@@ -66,9 +66,7 @@
         avatar = [image copy];
         self.avatarView.image = avatar;
         self.avatarView.contentMode= UIViewContentModeScaleAspectFit ;
-        self.avatarView.userInteractionEnabled = YES;
-        UITapGestureRecognizer *singtap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickAvatar:)];
-        [self.avatarView addGestureRecognizer:singtap];
+        self.avatarView.frame = CGRectOffset(self.avatarView.frame, 0, 44) ;
     }
 }
 
@@ -77,6 +75,7 @@
         attactment = [image copy];
         self.attachView.image = attactment;
         self.attachView.contentMode= UIViewContentModeScaleAspectFit ;
+        self.attachView.frame = CGRectOffset(self.attachView.frame, 0, 44) ;
     }
 }
 
@@ -84,6 +83,7 @@
     if (![t isEqual:[NSNull null]] && ![t isEqualToString:title]) {
         title = [t copy];
         self.titleLabel.text = title;
+        self.titleLabel.frame = CGRectOffset(self.titleLabel.frame, 0, 44) ;
     }
 }
 
@@ -91,6 +91,38 @@
     if (![b isEqual:[NSNull null]] && ![b isEqualToString:body]) {
         body = [b copy];
         self.bodyLabel.text = body;
+        
+        CGFloat contentWidth = 289 ;
+        // 用何種字體進行顯示
+        UIFont *font = [UIFont systemFontOfSize:16];
+        
+        CGSize size = [body sizeWithFont:font constrainedToSize:CGSizeMake(contentWidth, 1000) lineBreakMode:UILineBreakModeWordWrap];
+        
+        [self.bodyLabel setContentMode:UIViewContentModeRight] ;
+        
+        CGRect rect = [self.bodyLabel textRectForBounds:self.bodyLabel.frame limitedToNumberOfLines:0];
+        
+        // 設置顯示榘形大小
+        rect.size = size;
+        
+        // 重置列文本區域
+        self.bodyLabel.frame = CGRectMake(rect.origin.x, rect.origin.y + 44, rect.size.width, rect.size.height) ;
+        
+        self.attachView.frame = CGRectMake(self.attachView.frame.origin.x, self.bodyLabel.frame.origin.y + self.bodyLabel.frame.size.height + 20, self.attachView.frame.size.width, self.attachView.frame.size.height) ;
+        
+        CGFloat scrollViewHeight = 0.0f;
+        for (UIView* view in self.backgroundView.subviews)
+        {
+            scrollViewHeight += view.frame.size.height;
+        }
+        
+        [self.backgroundView setContentSize:(CGSizeMake(ScreenWidth, scrollViewHeight + 120))];
+        
+        self.bodyLabel.font = font;
+        
+        self.bodyLabel.numberOfLines = 0;
+        
+        
     }
 }
 
@@ -98,6 +130,7 @@
     if (![t isEqual:[NSNull null]] && ![t isEqualToString:time]) {
         time = [t copy];
         self.timeLabel.text = time;
+        self.timeLabel.frame = CGRectOffset(self.timeLabel.frame, 0, 44) ;
     }
 }
 
@@ -173,18 +206,10 @@
     [UIView beginAnimations:nil context:context];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDuration:0.6];//动画时间长度，单位秒，浮点数
-    [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
-    //self.tableView.frame = CGRectMake(0, 480 - _tableView.frame.size.height, 320, _tableView.frame.size.height);
-    //self.toolbar.frame = CGRectMake(0, 480 - _tableView.frame.size.height - _toolbar.frame.size.height , 320, _toolbar.frame.size.height);
-    
     self.bigImageView.frame = CGRectMake(0, _toolbar.frame.size.height, ScreenWidth, ScreenHeight - _toolbar.frame.size.height);
-    
     self.toolbar.frame = CGRectMake(0, 0, ScreenWidth, _toolbar.frame.size.height);
-    
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
-    
     [NSThread detachNewThreadSelector:@selector(downloadBigImage:) toTarget:self withObject:appDelegate.currShare.msgAttach];
-    
     [UIView setAnimationDelegate:self];
     // 动画完毕后调用animationFinished
     [UIView setAnimationDidStopSelector:@selector(animationFinished)];
@@ -215,19 +240,12 @@
 
 - (IBAction) pushPickerView:(id)sender
 {
-    //_groupLabel.text = _tplName ;
     CGContextRef context = UIGraphicsGetCurrentContext();
     [UIView beginAnimations:nil context:context];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDuration:0.6];//动画时间长度，单位秒，浮点数
-    //self.pickerView.frame = CGRectMake(0, 480, 320, _pickerView.frame.size.height);
-    
-    //self.toolbar.frame = CGRectMake(0, 480, 320, _toolbar.frame.size.height);
-    //self.tableView.frame = CGRectMake(0, 480, 320, _tableView.frame.size.height + _toolbar.frame.size.height);
-    
-    self.bigImageView.frame = CGRectMake(0, 480 + _toolbar.frame.size.height + 176, 320, 480 - _toolbar.frame.size.height + 176);
-    self.toolbar.frame = CGRectMake(0, 480 + 176, 320, _toolbar.frame.size.height);
-    
+    self.bigImageView.frame = CGRectMake(0, ScreenHeight + _toolbar.frame.size.height, ScreenWidth, ScreenHeight - _toolbar.frame.size.height);
+    self.toolbar.frame = CGRectMake(0, ScreenHeight, ScreenWidth, _toolbar.frame.size.height);
     [UIView setAnimationDelegate:self];
     // 动画完毕后调用animationFinished
     [UIView setAnimationDidStopSelector:@selector(animationFinished)];

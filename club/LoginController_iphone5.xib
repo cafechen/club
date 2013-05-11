@@ -315,7 +315,7 @@
 						<string key="NSFrame">{{20, 389}, {280, 44}}</string>
 						<reference key="NSSuperview" ref="374246581"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="981128739"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -329,29 +329,6 @@
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">btn_LongWhite.png</string>
-						</object>
-						<reference key="IBUIFontDescription" ref="496374983"/>
-						<reference key="IBUIFont" ref="192562212"/>
-					</object>
-					<object class="IBUIButton" id="981128739">
-						<reference key="NSNextResponder" ref="374246581"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 441}, {280, 44}}</string>
-						<reference key="NSSuperview" ref="374246581"/>
-						<reference key="NSWindow"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">忘记密码</string>
-						<reference key="IBUIHighlightedTitleColor" ref="228793353"/>
-						<reference key="IBUINormalTitleColor" ref="166032157"/>
-						<reference key="IBUINormalTitleShadowColor" ref="551615661"/>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">btn_LongYellow.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="496374983"/>
 						<reference key="IBUIFont" ref="192562212"/>
@@ -511,7 +488,6 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="382597412"/>
 							<reference ref="289583797"/>
-							<reference ref="981128739"/>
 							<reference ref="448318340"/>
 							<reference ref="287017946"/>
 							<reference ref="478055188"/>
@@ -540,12 +516,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
 						<reference key="object" ref="289583797"/>
-						<reference key="parent" ref="374246581"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">7</int>
-						<reference key="object" ref="981128739"/>
-						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="374246581"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -626,7 +596,6 @@
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
@@ -713,7 +682,6 @@
 			<string key="Default-568h@2x.png">{640, 1136}</string>
 			<string key="btn_LongRed.png">{556, 77}</string>
 			<string key="btn_LongWhite.png">{556, 77}</string>
-			<string key="btn_LongYellow.png">{556, 77}</string>
 			<string key="panedrow.png">{30, 30}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

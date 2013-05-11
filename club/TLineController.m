@@ -88,8 +88,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     // 列寬
-    CGFloat contentWidth = 204; //self.tableView.frame.size.width;
+    CGFloat contentWidth = 260; //self.tableView.frame.size.width;
     // 用何種字體進行顯示
     UIFont *font = [UIFont systemFontOfSize:16];
     
@@ -101,13 +102,18 @@
     
     // 這裏返回需要的高度
     
+    if(size.height > 80){
+        size.height = 80 ;
+    }
+    
     if(share.msgAttach == nil || [@"" isEqualToString:share.msgAttach]){
-        size.height = size.height  + 48 + 20 ;
+        size.height = size.height  + 80 + 20 ;
     }else{
-        size.height = size.height  + 48 + 20 + 100 ;
+        size.height = size.height  + 80 + 20 + 100 ;
     }
     
     return size.height;
+    
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView
@@ -128,7 +134,7 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // 列寬
-    CGFloat contentWidth = 204 ;
+    CGFloat contentWidth = 260 ;
     // 用何種字體進行顯示
     UIFont *font = [UIFont systemFontOfSize:16];
     
@@ -171,12 +177,17 @@
     attachRect.size.width = 80 ;
     attachRect.size.height = 80 ;
     
+    
+    if(size.height > 80){
+        size.height = 80 ;
+    }
+    
     // 設置顯示榘形大小
     rect.size = size;
     
     // 重置列文本區域
     cell.bodyLabel.frame = rect;
-    cell.attachView.frame = CGRectMake(rect.origin.x, rect.origin.y + rect.size.height + 20, 80, 80);
+    cell.attachView.frame = CGRectMake(cell.bodyLabel.frame.origin.x, cell.bodyLabel.frame.origin.y + cell.bodyLabel.frame.size.height + 20, 80, 80);
     cell.body = [NSString stringWithFormat:@"%@", msg.msgBody] ;
     cell.title = msg.msgTitle ;
     cell.time = msg.msgTime ;

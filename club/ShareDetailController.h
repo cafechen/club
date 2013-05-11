@@ -18,6 +18,7 @@
 @property (copy, nonatomic) NSString *userId;
 @property (nonatomic,readwrite) BOOL toPersion;
 
+@property (nonatomic, retain) IBOutlet UIScrollView *backgroundView;
 @property (nonatomic, retain) IBOutlet UIImageView *avatarView;
 @property (nonatomic, retain) IBOutlet UIImageView *attachView;
 @property (nonatomic, retain) IBOutlet UILabel *bodyLabel;
