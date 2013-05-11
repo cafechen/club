@@ -1,30 +1,36 @@
 //
-//  TLineController.m
-//  pengpengtou
+//  PersionController.m
+//  club
 //
-//  Created by steven on 12-12-9.
-//  Copyright (c) 2012年 steven. All rights reserved.
+//  Created by steven on 13-5-10.
+//  Copyright (c) 2013年 ibm. All rights reserved.
 //
 
-#import "TLineController.h"
-#import "ShareCell.h"
-#import "Share.h"
-#import "EGORefreshTableHeaderView.h"
+#import "PersionController.h"
 #import "HTTPTools.h"
+#import "AppDelegate.h"
 #import "JSONKit.h"
+#import "Share.h"
+#import "ShareCell.h"
 #import "Cache.h"
 
-@interface TLineController ()
+@interface PersionController ()
 
 @end
 
-@implementation TLineController
+@implementation PersionController
 
 @synthesize listData;
-@synthesize selected;
-@synthesize tabName;
-@synthesize templateId;
-@synthesize classId;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.title = NSLocalizedString(@"个人中心", @"个人中心");
+        self.tabBarItem.image = [UIImage imageNamed:@"profile"];
+    }
+    return self;
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -52,27 +58,39 @@
             [self.tableView addSubview:footerView];
             _footerRefreshView = footerView;
             [_footerRefreshView refreshLastUpdatedDate];
+            
         }
 	}
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        self.title = NSLocalizedString(@"社交分享", @"社交分享");
-        self.tabBarItem.image = [UIImage imageNamed:@"public"];
-    }
-    return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self getLists];
+    [self loadHeader] ;
+    self.listData = [self getLists];
     [self.tableView reloadData];
+}
+
+
+-(void) loadHeader
+{
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+    
+    NSString *response = [HTTPTools sendAuthHttpUrl:[NSString stringWithFormat:@"/api/users/show.json?id=%@&authid=%@", appDelegate.currUserId, appDelegate.username] Method:@"GET" UserName:appDelegate.username Password:appDelegate.password] ;
+    
+    NSDictionary *dict = [response objectFromJSONString];
+    
+    NSLog(@"#### %@", dict) ;
+    
+    self.titleItem.title = [NSString stringWithFormat:@"%@的分享",[dict objectForKey: @"screen_name"]] ;
+    
+    self.personName.text = [dict objectForKey: @"screen_name"] ;
+    
+    [self downloadImageActor:[dict objectForKey: @"profile_image_url"]] ;
+    
+    [self.actorButton setBackgroundImage:self.profileImage forState:UIControlStateNormal] ;
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,14 +116,14 @@
     UIFont *font = [UIFont systemFontOfSize:16];
     
     // 該行要顯示的內容
-    Share *share = [listData objectAtIndex:indexPath.row];
-    NSString *content = share.msgBody ;
+    Share *msg = [listData objectAtIndex:indexPath.row];
+    NSString *content = msg.msgBody ;
     // 計算出顯示完內容需要的最小尺寸
     CGSize size = [content sizeWithFont:font constrainedToSize:CGSizeMake(contentWidth, 1000) lineBreakMode:UILineBreakModeWordWrap];
     
     // 這裏返回需要的高度
     
-    if(share.msgAttach == nil || [@"" isEqualToString:share.msgAttach]){
+    if(msg.msgAttach == nil || [@"" isEqualToString:msg.msgAttach]){
         size.height = size.height  + 48 + 20 ;
     }else{
         size.height = size.height  + 48 + 20 + 100 ;
@@ -116,11 +134,6 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView
   willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    //NSUInteger row = [indexPath row];
-    
-    //Share *share = (Share *)[listData objectAtIndex:row];
-    
     return nil;
 }
 
@@ -139,7 +152,7 @@
     static NSString *TableSampleIdentifier = @"ShareCellIdentifier";
     
     ShareCell *cell = [tableView dequeueReusableCellWithIdentifier:
-                      TableSampleIdentifier];
+                       TableSampleIdentifier];
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ShareCell" owner:self options:nil];
         cell = [nib objectAtIndex:0];
@@ -149,17 +162,22 @@
     
     [cell.textLabel setContentMode:UIViewContentModeRight] ;
     
-    cell.attactment = nil;
-    cell.avatar = nil;
+    cell.attactment = nil ;
+    cell.avatar = nil ;
     cell.toPersion = NO ;
     
-    if(msg.msgActor != nil && ![@"" isEqualToString:msg.msgActor]){
-        NSArray *data = [NSArray arrayWithObjects:msg.msgActor, cell, nil];
-        [NSThread detachNewThreadSelector:@selector(downloadImageShareActor:) toTarget:self withObject:data];
-    }else{
-        cell.avatar = [UIImage imageNamed:@"blank.png"] ;
-    }
+    //NSURL *url = [NSURL URLWithString:msg.msgActor];
+    
+    NSArray *data = [NSArray arrayWithObjects:msg.msgActor, cell, nil];
+    
+    [NSThread detachNewThreadSelector:@selector(downloadImageShareActor:) toTarget:self withObject:data];
+    
+    NSLog(@"msgAttach %@", msg.msgAttach) ;
+    
     if(msg.msgAttach != nil && ![@"" isEqualToString:msg.msgAttach]){
+        NSLog(@"bbbbbbbbb") ;
+        //attachImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:attachUrl]];
+        //attachImage = [UIImage imageNamed:@"loading3.gif"] ;
         NSArray *data = [NSArray arrayWithObjects:msg.msgAttach,cell, nil];
         [NSThread detachNewThreadSelector:@selector(downloadImageShareCell:) toTarget:self withObject:data];
     }
@@ -173,12 +191,17 @@
     
     // 設置顯示榘形大小
     rect.size = size;
-    
+    NSLog(@"%@", msg.msgBody) ;
+    NSLog(@"111 [%f][%f][%f][%f]", rect.origin.x, rect.origin.y, rect.size.height, rect.size.width) ;
+    NSLog(@"222 [%f][%f][%f][%f]", attachRect.origin.x, attachRect.origin.y, attachRect.size.height, attachRect.size.width) ;
+    NSLog(@"333 [%f][%f][%f][%f]", cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.height, cell.frame.size.width) ;
     // 重置列文本區域
     cell.bodyLabel.frame = rect;
+    //cell.bodyView.frame = rect;
     cell.attachView.frame = CGRectMake(rect.origin.x, rect.origin.y + rect.size.height + 20, 80, 80);
     cell.body = [NSString stringWithFormat:@"%@", msg.msgBody] ;
     cell.title = msg.msgTitle ;
+    NSLog(@"TIME ********** %@", msg.msgTime) ;
     cell.time = msg.msgTime ;
     cell.userId = msg.msgUserId ;
     
@@ -186,6 +209,8 @@
     cell.bodyLabel.numberOfLines = 0;
     // 設置顯示字體(一定要和之前計算時使用字體一至)
     cell.bodyLabel.font = font;
+    
+    NSLog(@"%@ %@", cell.body, cell.title) ;
     
 	return cell;
 }
@@ -231,81 +256,91 @@
 
 -(NSMutableArray *) getLists
 {
-    self.listData = [[NSMutableArray alloc] init];
     
-    NSString *urlString = nil ;
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
     
-    urlString = [NSString stringWithFormat:@"/api/statuses/public_timeline.json"] ;
+    NSMutableArray *result = [[NSMutableArray alloc] init];
     
-    NSString *response = [HTTPTools sendSNRequestUri:urlString Params:[NSDictionary dictionaryWithObjectsAndKeys:nil]] ;
+    NSString *urlString = [NSString stringWithFormat:@"/api/statuses/user_timeline.json?user_id=%@", appDelegate.currUserId] ;
+    
+    NSString *response = [HTTPTools sendAuthHttpUrl:urlString Method:@"GET" UserName:appDelegate.username Password:appDelegate.password] ;
     
     if(response == nil){
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"网络异常，请检查网络！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"网络异常，请检查网络！" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
-        return self.listData;
-    }
-    NSArray *items = [response objectFromJSONString];
-    for(int i = 0; i < items.count; i++){
-        NSDictionary *item = [items objectAtIndex:i] ;
-        Share *share = [[Share alloc] init];
-        share.msgId = [item objectForKey: @"id"];
-        share.msgBody = [item objectForKey: @"text"];
-        share.msgTime = [item objectForKey:@"created_at"] ;
-        share.msgTime = [share.msgTime substringToIndex:19] ;
-        NSDictionary *user = [item objectForKey: @"user"];
-        share.msgActor = [user objectForKey: @"profile_image_url"];
-        share.msgTitle = [user objectForKey: @"name"];
-        share.msgUserId = [NSString stringWithFormat:@"%@", [user objectForKey: @"id"]];
-        
-        NSArray *attachs = [item objectForKey: @"attachments"];
-        if(attachs != nil && [attachs count] > 0){
-            NSDictionary *attach = [attachs objectAtIndex:0] ;
-            share.msgAttach = [attach objectForKey:@"url"] ;
-        }
-        
-        [self.listData addObject:share];
+        return result ;
     }
     
-    return self.listData ;
+    NSArray *items = [response objectFromJSONString] ;
+    
+    for(int i = 0; i < items.count; i++){
+        NSDictionary *item = [items objectAtIndex:i] ;
+        Share *msg = [[Share alloc] init] ;
+        msg.msgId = [item objectForKey: @"id"] ;
+        msg.msgBody = [item objectForKey: @"text"];
+        NSDictionary *user = [item objectForKey: @"user"];
+        msg.msgActor = [user objectForKey: @"profile_image_url"];
+        msg.msgTitle = [user objectForKey: @"name"];
+        msg.msgUserId = [user objectForKey: @"id"];
+        msg.msgTime = [item objectForKey: @"created_at"];
+        msg.msgTime = [msg.msgTime substringToIndex:19] ;
+        
+        NSDictionary *obj = [item objectForKey: @"object"];
+        if(obj != nil){
+            NSArray *attachs = [obj objectForKey: @"attachedObjects"];
+            if(attachs != nil && [attachs count] > 0){
+                NSDictionary *attach = [attachs objectAtIndex:1] ;
+                NSDictionary *mediaLink = [attach objectForKey:@"mediaLink"] ;
+                msg.msgAttach = [mediaLink objectForKey:@"url"] ;
+            }
+        }
+        [result addObject:msg];
+    }
+    
+    return result ;
 }
 
 -(void) reloadLists
 {
     
-    NSString *urlString = nil ;
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+
+    NSString *urlString = [NSString stringWithFormat:@"/api/statuses/user_timeline.json?user_id=%@", appDelegate.currUserId] ;
     
-    urlString = [NSString stringWithFormat:@"/api/statuses/public_timeline.json"] ;
-    
-    NSString *response = [HTTPTools sendSNRequestUri:urlString Params:[NSDictionary dictionaryWithObjectsAndKeys:nil]] ;
+    NSString *response = [HTTPTools sendAuthHttpUrl:urlString Method:@"GET" UserName:appDelegate.username Password:appDelegate.password] ;
     
     if(response == nil){
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"网络异常，请检查网络！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"网络异常，请检查网络！" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
         return ;
     }
     
-    NSArray *items = [response objectFromJSONString];
+    NSArray *items = [response objectFromJSONString] ;
+    
     for(int i = 0; i < items.count; i++){
         NSDictionary *item = [items objectAtIndex:i] ;
-        Share *share = [[Share alloc] init];
-        share.msgId = [item objectForKey: @"id"];
-        share.msgBody = [item objectForKey: @"text"];
-        share.msgTime = [item objectForKey:@"created_at"] ;
-        share.msgTime = [share.msgTime substringToIndex:19] ;
+        Share *msg = [[Share alloc] init] ;
+        msg.msgId = [item objectForKey: @"id"] ;
+        msg.msgBody = [item objectForKey: @"text"];
         NSDictionary *user = [item objectForKey: @"user"];
-        share.msgActor = [user objectForKey: @"profile_image_url"];
-        share.msgTitle = [user objectForKey: @"name"];
-        share.msgUserId = [NSString stringWithFormat:@"%@", [user objectForKey: @"id"]];
+        msg.msgActor = [user objectForKey: @"profile_image_url"];
+        msg.msgTitle = [user objectForKey: @"name"];
+        msg.msgUserId = [user objectForKey: @"id"];
+        msg.msgTime = [item objectForKey: @"created_at"];
+        msg.msgTime = [msg.msgTime substringToIndex:19] ;
         
-        NSArray *attachs = [item objectForKey: @"attachments"];
-        if(attachs != nil && [attachs count] > 0){
-            NSDictionary *attach = [attachs objectAtIndex:0] ;
-            share.msgAttach = [attach objectForKey:@"url"] ;
+        NSDictionary *obj = [item objectForKey: @"object"];
+        if(obj != nil){
+            NSArray *attachs = [obj objectForKey: @"attachedObjects"];
+            if(attachs != nil && [attachs count] > 0){
+                NSDictionary *attach = [attachs objectAtIndex:1] ;
+                NSDictionary *mediaLink = [attach objectForKey:@"mediaLink"] ;
+                msg.msgAttach = [mediaLink objectForKey:@"url"] ;
+            }
         }
-        
         Share *latestShare = [self.listData objectAtIndex:0] ;
-        if([latestShare.msgId intValue] < [share.msgId intValue]){
-            [self.listData insertObject:share atIndex:0];
+        if([latestShare.msgId intValue] < [msg.msgId intValue]){
+            [self.listData insertObject:msg atIndex:0];
         }
     }
 }
@@ -317,38 +352,44 @@
         return ;
     }
     
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+    
     Share *oldestShare = [self.listData objectAtIndex:(self.listData.count - 1)] ;
     
-    NSString *urlString = [NSString stringWithFormat:@"/api/statuses/public_timeline.json?max_id=%@&count=21", oldestShare.msgId] ;
+    NSString *urlString = [NSString stringWithFormat:@"/api/statuses/user_timeline.json?max_id=%@&count=21&user_id=%@", oldestShare.msgId, appDelegate.currUserId] ;
     
-    NSString *response = [HTTPTools sendSNRequestUri:urlString Params:[NSDictionary dictionaryWithObjectsAndKeys:nil]] ;
+    NSString *response = [HTTPTools sendAuthHttpUrl:urlString Method:@"GET" UserName:appDelegate.username Password:appDelegate.password] ;
     
     if(response == nil){
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"网络异常，请检查网络！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"网络异常，请检查网络！" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
         return ;
     }
     
-    NSArray *items = [response objectFromJSONString];
+    NSArray *items = [response objectFromJSONString] ;
+    
     for(int i = 1; i < items.count; i++){
         NSDictionary *item = [items objectAtIndex:i] ;
-        Share *share = [[Share alloc] init];
-        share.msgId = [item objectForKey: @"id"];
-        share.msgBody = [item objectForKey: @"text"];
-        share.msgTime = [item objectForKey:@"created_at"] ;
-        share.msgTime = [share.msgTime substringToIndex:19] ;
+        Share *msg = [[Share alloc] init] ;
+        msg.msgId = [item objectForKey: @"id"] ;
+        msg.msgBody = [item objectForKey: @"text"];
         NSDictionary *user = [item objectForKey: @"user"];
-        share.msgActor = [user objectForKey: @"profile_image_url"];
-        share.msgTitle = [user objectForKey: @"name"];
-        share.msgUserId = [NSString stringWithFormat:@"%@", [user objectForKey: @"id"]];
+        msg.msgActor = [user objectForKey: @"profile_image_url"];
+        msg.msgTitle = [user objectForKey: @"name"];
+        msg.msgUserId = [user objectForKey: @"id"];
+        msg.msgTime = [item objectForKey: @"created_at"];
+        msg.msgTime = [msg.msgTime substringToIndex:19] ;
         
-        NSArray *attachs = [item objectForKey: @"attachments"];
-        if(attachs != nil && [attachs count] > 0){
-            NSDictionary *attach = [attachs objectAtIndex:0] ;
-            share.msgAttach = [attach objectForKey:@"url"] ;
+        NSDictionary *obj = [item objectForKey: @"object"];
+        if(obj != nil){
+            NSArray *attachs = [obj objectForKey: @"attachedObjects"];
+            if(attachs != nil && [attachs count] > 0){
+                NSDictionary *attach = [attachs objectAtIndex:1] ;
+                NSDictionary *mediaLink = [attach objectForKey:@"mediaLink"] ;
+                msg.msgAttach = [mediaLink objectForKey:@"url"] ;
+            }
         }
-        
-        [self.listData addObject:share];
+        [self.listData addObject:msg];
     }
 }
 
@@ -368,8 +409,66 @@
     }
 }
 
+- (void) changeActorButtonAction
+{
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = sourceType;
+    [self presentModalViewController:picker animated:YES];
+}
+
+- (void) changeActorPhotoButtonAction
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentModalViewController:picker animated:YES];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"%d", buttonIndex);
+    if(buttonIndex == 0){
+        return ;
+    }else if(buttonIndex == 1){
+        [self changeActorButtonAction];
+    }else if(buttonIndex == 2){
+        [self changeActorPhotoButtonAction];
+    }
+}
+
+- (IBAction) buttonPressed:(id)sender
+{
+    UIAlertView*alert = [[UIAlertView alloc]initWithTitle:@""
+                                                  message:@"请选择上传方式："
+                                                 delegate:self
+                                        cancelButtonTitle:@"取消"
+                                        otherButtonTitles:@"拍照", @"相册", nil];
+    [alert show];
+}
+
+- (void)saveImage:(UIImage *)image {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+    BOOL result = [HTTPTools updateProfileImage:appDelegate.username Password:appDelegate.password Image:image] ;
+    if(result){
+        //[self.actorButton setImage:image forState:UIControlStateNormal] ;
+        [self viewDidLoad] ;
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"上传头像失败！" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+
 - (void) downloadImageShareCell: (NSArray *)data
 {
+    NSLog(@"data size %d", data.count) ;
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
     for(int i = 0; i < appDelegate.imageCacheList.count; i++){
         Cache *cache = [appDelegate.imageCacheList objectAtIndex:i];
@@ -389,8 +488,28 @@
     [appDelegate.imageCacheList addObject:newCache];
 }
 
+- (void) downloadImageActor: (NSString *) url
+{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+    for(int i = 0; i < appDelegate.imageCacheList.count; i++){
+        Cache *cache = [appDelegate.imageCacheList objectAtIndex:i];
+        if([cache.imageUrl isEqualToString:url]){
+            self.profileImage = cache.imageCache ;
+            return ;
+        }
+    }
+    self.profileImage = [UIImage imageNamed:@"blank.png"] ;
+    UIImage *loadImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
+    self.profileImage = loadImage ;
+    Cache *newCache = [[Cache alloc] init] ;
+    newCache.imageCache = [loadImage copy] ;
+    newCache.imageUrl = url ;
+    [appDelegate.imageCacheList addObject:newCache];
+}
+
 - (void) downloadImageShareActor: (NSArray *)data
 {
+    NSLog(@"data size %d", data.count) ;
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
     for(int i = 0; i < appDelegate.imageCacheList.count; i++){
         Cache *cache = [appDelegate.imageCacheList objectAtIndex:i];
@@ -404,22 +523,30 @@
     cell.avatar = [UIImage imageNamed:@"blank.png"] ;
     UIImage *loadImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[data objectAtIndex:0]]]];
     cell.avatar = loadImage ;
-    Cache *newCache = [[Cache alloc] init];
-    newCache.imageCache = [loadImage copy];
+    Cache *newCache = [[Cache alloc] init] ;
+    newCache.imageCache = [loadImage copy] ;
     newCache.imageUrl = [data objectAtIndex:0] ;
     [appDelegate.imageCacheList addObject:newCache];
+}
+
+#pragma mark –
+#pragma mark Camera View Delegate Methods
+- (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissModalViewControllerAnimated:YES];
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage] ;
+    [self performSelector:@selector(saveImage:)
+               withObject:image
+               afterDelay:0.5];
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction) gotoLastPageButtonAction:(id)sender
 {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
-    [appDelegate gotoLastPage2] ;
-}
-
-- (IBAction) gotoSharePageButtonAction:(id)sender
-{
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
-    [appDelegate gotoSharePage] ;
+    [appDelegate gotoLastPage3] ;
 }
 
 #pragma mark -
@@ -443,10 +570,10 @@
 	_reloading = NO;
 	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     [_footerRefreshView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    [self.tableView reloadData];
+	[self.tableView reloadData];
+    [self loadHeader] ;
     _footerRefreshView.frame = CGRectMake(0, self.tableView.contentSize.height, 320, 65) ;
 }
-
 
 #pragma mark -
 #pragma mark UIScrollViewDelegate Methods
@@ -497,7 +624,5 @@
 	return [NSDate date]; // should return date data source was last changed
 	
 }
-
-
 
 @end

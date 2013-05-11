@@ -162,6 +162,7 @@
     
     cell.attactment = nil ;
     cell.avatar = nil ;
+    cell.toPersion = NO ;
     
     //NSURL *url = [NSURL URLWithString:msg.msgActor];
     

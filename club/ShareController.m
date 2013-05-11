@@ -164,36 +164,49 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
 - (IBAction) sendButtonAction:(id)sender
 {
-    NSLog(@"send message ...") ;
-    
-    if(_textView.text == nil || [@"" isEqualToString:_textView.text]){
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"内容不能为空！" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+
+    if(self.textView.text == nil || [@"" isEqualToString:self.textView.text]){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"内容不能为空！" message:nil delegate:self cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
         [alertView show];
+        return ;
     }
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+    if([self.textView.text length] > 70){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"内容不能超过70个字！" message:nil delegate:self cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return ;
+    }
     
     if(self.imageView.image == nil){
+        [NSThread detachNewThreadSelector:@selector(showLoading) toTarget:self withObject:nil];
         if([HTTPTools sendMessageHttpUserName: appDelegate.username
                                      Password: appDelegate.password
-                                       Status: [_textView.text URLEncodedString]
+                                       Status: [self.textView.text URLEncodedString]
                                        UserId: appDelegate.authorId]){
+            [NSThread detachNewThreadSelector:@selector(removeLoading) toTarget:self withObject:nil];
             [appDelegate gotoLastTLPage] ;
         }else{
+            [NSThread detachNewThreadSelector:@selector(removeLoading) toTarget:self withObject:nil];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"服务器异常，发送失败！" message:nil delegate:self cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
             [alertView show];
         }
     }else{
+        [NSThread detachNewThreadSelector:@selector(showLoading) toTarget:self withObject:nil];
         if([HTTPTools sendMessageImageHttpUserName: appDelegate.username
                                           Password: appDelegate.password
-                                            Status: _textView.text
+                                            Status: self.textView.text
                                             UserId: appDelegate.authorId
                                              Image: self.imageView.image]){
+            [NSThread detachNewThreadSelector:@selector(removeLoading) toTarget:self withObject:nil];
             [appDelegate gotoLastTLPage] ;
         }else{
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"服务器异常，发送失败！" message:nil delegate:self cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
+            [NSThread detachNewThreadSelector:@selector(removeLoading) toTarget:self withObject:nil];
             [alertView show];
         }
     }
@@ -205,5 +218,14 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [appDelegate gotoLastPage3] ;
 }
 
+- (void) showLoading
+{
+    [self.view addSubview:self.loadingView] ;
+}
+
+- (void) removeLoading
+{
+    [self.loadingView removeFromSuperview] ;
+}
 
 @end

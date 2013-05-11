@@ -16,6 +16,7 @@
 @synthesize title;
 @synthesize time;
 @synthesize userId;
+@synthesize toPersion ;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -70,6 +71,15 @@
         time = [t copy];
         self.timeLabel.text = time;
     }
+}
+
+-(void)clickAvatar:(id)sender
+{
+    if(!toPersion)
+        return ;
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+    appDelegate.currUserId = [self.userId copy] ;
+    [appDelegate gotoPersionPage];
 }
 
 @end

@@ -18,6 +18,8 @@
 
 @property (nonatomic, retain) IBOutlet UITextView *textView;
 
+@property (retain, nonatomic) IBOutlet UIView *loadingView ;
+
 - (IBAction) addAttentment:(id)sender;
 
 - (IBAction) addAttentmentPhoto:(id)sender;

@@ -25,6 +25,7 @@
 @property (nonatomic, retain) NSString *password;
 @property (nonatomic, retain) NSString *authorId;
 @property (nonatomic, retain) NSString *nickname;
+@property (nonatomic, retain) NSString *currUserId;
 
 - (void)gotoSignUpPage ;
 - (void)gotoLastPage1 ;
@@ -37,5 +38,6 @@
 - (void)gotoTLinePage ;
 - (void)gotoLastTLPage ;
 - (void)gotoLoginPage ;
+- (void)gotoPersionPage ;
 
 @end

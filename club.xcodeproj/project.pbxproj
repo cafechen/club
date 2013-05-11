@@ -220,6 +220,9 @@
 		ADB6C368173BED2F000FE3B6 /* NewsDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB6C366173BED2F000FE3B6 /* NewsDetailController.m */; };
 		ADB6C369173BED2F000FE3B6 /* NewsDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB6C367173BED2F000FE3B6 /* NewsDetailController.xib */; };
 		ADB6C36B173BED4B000FE3B6 /* NewsDetailController_iphone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADB6C36A173BED4B000FE3B6 /* NewsDetailController_iphone5.xib */; };
+		ADC84958173DEDC4005DB08B /* PersionController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC84956173DEDC4005DB08B /* PersionController.m */; };
+		ADC84959173DEDC4005DB08B /* PersionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC84957173DEDC4005DB08B /* PersionController.xib */; };
+		ADC8495B173DEDD9005DB08B /* PersionController_iphone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADC8495A173DEDD8005DB08B /* PersionController_iphone5.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -462,6 +465,10 @@
 		ADB6C366173BED2F000FE3B6 /* NewsDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailController.m; sourceTree = "<group>"; };
 		ADB6C367173BED2F000FE3B6 /* NewsDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsDetailController.xib; sourceTree = "<group>"; };
 		ADB6C36A173BED4B000FE3B6 /* NewsDetailController_iphone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsDetailController_iphone5.xib; sourceTree = "<group>"; };
+		ADC84955173DEDC4005DB08B /* PersionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersionController.h; sourceTree = "<group>"; };
+		ADC84956173DEDC4005DB08B /* PersionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersionController.m; sourceTree = "<group>"; };
+		ADC84957173DEDC4005DB08B /* PersionController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersionController.xib; sourceTree = "<group>"; };
+		ADC8495A173DEDD8005DB08B /* PersionController_iphone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersionController_iphone5.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -543,6 +550,10 @@
 		048E5CD2172D044E000CED62 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				ADC84955173DEDC4005DB08B /* PersionController.h */,
+				ADC84956173DEDC4005DB08B /* PersionController.m */,
+				ADC84957173DEDC4005DB08B /* PersionController.xib */,
+				ADC8495A173DEDD8005DB08B /* PersionController_iphone5.xib */,
 				041FF2FD173C7EA400D1B9A5 /* TLineController.h */,
 				041FF2FE173C7EA400D1B9A5 /* TLineController.m */,
 				041FF2FF173C7EA500D1B9A5 /* TLineController.xib */,
@@ -1033,6 +1044,8 @@
 				047A8332173CD6D300A40282 /* ibmclub.png in Resources */,
 				0449B554173D0835006DDEE1 /* HomeController.xib in Resources */,
 				0449B556173D0895006DDEE1 /* HomeController_iphone5.xib in Resources */,
+				ADC84959173DEDC4005DB08B /* PersionController.xib in Resources */,
+				ADC8495B173DEDD9005DB08B /* PersionController_iphone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1066,6 +1079,7 @@
 				041FF309173C8CE700D1B9A5 /* NSString+URLEncoding.m in Sources */,
 				041FF30C173C90EF00D1B9A5 /* CommonFunc.m in Sources */,
 				0449B553173D0835006DDEE1 /* HomeController.m in Sources */,
+				ADC84958173DEDC4005DB08B /* PersionController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

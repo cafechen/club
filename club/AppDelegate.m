@@ -16,6 +16,9 @@
 #import "ShareController.h"
 #import "TLineController.h"
 #import "HomeController.h"
+#import "PersionController.h"
+#import "HTTPTools.h"
+#import "NSString+URLEncoding.h"
 
 @implementation AppDelegate
 
@@ -252,6 +255,32 @@
     UIViewController *currController = [self.navController3.viewControllers lastObject] ;
     [currController viewDidLoad] ;
     NSLog(@"Goto Last TL Page End") ;
+}
+
+- (void)gotoPersionPage
+{
+    NSLog(@"Goto Persion Page Start") ;
+    PersionController *persionController = nil ;
+    if(isIPhone5){
+        persionController = [[PersionController alloc] initWithNibName:@"PersionController_iphone5" bundle:nil];
+    }else{
+        persionController = [[PersionController alloc] initWithNibName:@"PersionController" bundle:nil];
+    }
+    [self.navController3 pushViewController:persionController animated:YES] ;
+    
+    self.window.rootViewController = self.tabBarController;
+    NSLog(@"Goto Persion Detail Page End") ;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    self.window.rootViewController = self.tabBarController;
+    if(buttonIndex == 0){
+        [self.window.rootViewController viewDidLoad] ;
+        return ;
+    }else if(buttonIndex == 1){
+        [NSThread detachNewThreadSelector:@selector(sendNSync) toTarget:self withObject:nil];
+    }
 }
 
 @end
