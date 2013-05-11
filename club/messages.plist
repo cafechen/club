@@ -2,6 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UserUnactive</key>
+	<string>用户未激活,请点击邮箱激活 
+link激活帐号</string>
+	<key>PassWordNull</key>
+	<string>缺少密码</string>
+	<key>InvaildParamterEmail</key>
+	<string>缺少邮箱地址</string>
+	<key>InvaildParamter</key>
+	<string>必须为IBM邮箱</string>
 	<key>UsernameOrPasswordError</key>
 	<string>用户名或密码错误</string>
 	<key>UserExist</key>
