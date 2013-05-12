@@ -17,6 +17,7 @@
 @property (copy, nonatomic) NSString *time;
 @property (copy, nonatomic) NSString *userId;
 @property (nonatomic,readwrite) BOOL toPersion;
+@property (nonatomic,readwrite) int navNum;
 
 @property (nonatomic, retain) IBOutlet UIScrollView *backgroundView;
 @property (nonatomic, retain) IBOutlet UIImageView *avatarView;

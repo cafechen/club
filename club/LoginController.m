@@ -40,8 +40,6 @@
     NSString *username = [userDefault objectForKey:@"username"] ;
     NSString *password = [userDefault objectForKey:@"password"] ;
     
-    NSLog(@"username [%@] password [%@] autoLogin [%d] SavePassword [%d]", username,password,self.isSavePasswd,self.isAutoLogin) ;
-    
     if(self.isAutoLogin){
         if(username != nil && password != nil){
             self.usernameField.text = username ;
@@ -123,8 +121,6 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"无法访问服务器，请检查您的网络！" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
-    
-    NSLog(@"%@", ret) ;
 }
 
 - (IBAction) gotoSignUpButtonAction:(id)sender

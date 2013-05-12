@@ -43,7 +43,6 @@
     }
     
     self.titleLabel.text = [appDelegate.currNewsDetail objectForKey:@"title"];
-    NSLog(@"%@", [appDelegate.currNewsDetail objectForKey:@"content"]) ;
     NSData *data = [[appDelegate.currNewsDetail objectForKey:@"content"] dataUsingEncoding:NSUTF8StringEncoding];
     [self.webView loadData:data MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:[NSURL URLWithString:@"http://42.96.144.219/"]];
     self.webView.delegate = self ;
@@ -51,18 +50,6 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *) webView
 {
-    /*
-    CGSize actualSize = [webView sizeThatFits:CGSizeZero];
-    CGRect newFrame = webView.frame;
-    newFrame.size.height = actualSize.height;
-    webView.frame = newFrame;
-    NSLog(@"#### %f", newFrame.size.height) ;
-    webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y, webView.frame.size.width, newFrame.size.height + 100) ;
-    NSArray *arr = [webView subviews];
-    UIScrollView *scrollView = [arr objectAtIndex:0];
-    NSLog(@"**** %f",[scrollView  contentSize].height);
-    NSLog(@"**** %f",webView.frame.size.height);
-     */
 }
 
 - (void)didReceiveMemoryWarning

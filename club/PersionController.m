@@ -82,8 +82,6 @@
     
     NSDictionary *dict = [response objectFromJSONString];
     
-    NSLog(@"#### %@", dict) ;
-    
     self.titleItem.title = [NSString stringWithFormat:@"%@的大杂烩",[dict objectForKey: @"screen_name"]] ;
     
     self.personName.text = [dict objectForKey: @"screen_name"] ;
@@ -111,7 +109,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     // 列寬
-    CGFloat contentWidth = 204; //self.tableView.frame.size.width;
+    CGFloat contentWidth = 260; //self.tableView.frame.size.width;
     // 用何種字體進行顯示
     UIFont *font = [UIFont systemFontOfSize:16];
     
@@ -123,10 +121,14 @@
     
     // 這裏返回需要的高度
     
+    if(size.height > 80){
+        size.height = 80 ;
+    }
+    
     if(msg.msgAttach == nil || [@"" isEqualToString:msg.msgAttach]){
-        size.height = size.height  + 48 + 20 ;
+        size.height = size.height  + 80 + 20 ;
     }else{
-        size.height = size.height  + 48 + 20 + 100 ;
+        size.height = size.height  + 80 + 20 + 100 ;
     }
     
     return size.height;
@@ -134,6 +136,15 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView
   willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSUInteger row = [indexPath row];
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+    
+    appDelegate.currShare = (Share *)[listData objectAtIndex:row];
+    
+    [appDelegate gotoShareDetailPage] ;
+    
     return nil;
 }
 
@@ -141,7 +152,7 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // 列寬
-    CGFloat contentWidth = 204 ;
+    CGFloat contentWidth = 260 ;
     // 用何種字體進行顯示
     UIFont *font = [UIFont systemFontOfSize:16];
     
@@ -172,12 +183,7 @@
     
     [NSThread detachNewThreadSelector:@selector(downloadImageShareActor:) toTarget:self withObject:data];
     
-    NSLog(@"msgAttach %@", msg.msgAttach) ;
-    
     if(msg.msgAttach != nil && ![@"" isEqualToString:msg.msgAttach]){
-        NSLog(@"bbbbbbbbb") ;
-        //attachImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:attachUrl]];
-        //attachImage = [UIImage imageNamed:@"loading3.gif"] ;
         NSArray *data = [NSArray arrayWithObjects:msg.msgAttach,cell, nil];
         [NSThread detachNewThreadSelector:@selector(downloadImageShareCell:) toTarget:self withObject:data];
     }
@@ -189,19 +195,18 @@
     attachRect.size.width = 80 ;
     attachRect.size.height = 80 ;
     
+    if(size.height > 80){
+        size.height = 80 ;
+    }
+    
     // 設置顯示榘形大小
     rect.size = size;
-    NSLog(@"%@", msg.msgBody) ;
-    NSLog(@"111 [%f][%f][%f][%f]", rect.origin.x, rect.origin.y, rect.size.height, rect.size.width) ;
-    NSLog(@"222 [%f][%f][%f][%f]", attachRect.origin.x, attachRect.origin.y, attachRect.size.height, attachRect.size.width) ;
-    NSLog(@"333 [%f][%f][%f][%f]", cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.height, cell.frame.size.width) ;
     // 重置列文本區域
     cell.bodyLabel.frame = rect;
     //cell.bodyView.frame = rect;
     cell.attachView.frame = CGRectMake(rect.origin.x, rect.origin.y + rect.size.height + 20, 80, 80);
     cell.body = [NSString stringWithFormat:@"%@", msg.msgBody] ;
     cell.title = msg.msgTitle ;
-    NSLog(@"TIME ********** %@", msg.msgTime) ;
     cell.time = msg.msgTime ;
     cell.userId = msg.msgUserId ;
     
@@ -209,8 +214,6 @@
     cell.bodyLabel.numberOfLines = 0;
     // 設置顯示字體(一定要和之前計算時使用字體一至)
     cell.bodyLabel.font = font;
-    
-    NSLog(@"%@ %@", cell.body, cell.title) ;
     
 	return cell;
 }
@@ -285,14 +288,10 @@
         msg.msgTime = [item objectForKey: @"created_at"];
         msg.msgTime = [msg.msgTime substringToIndex:19] ;
         
-        NSDictionary *obj = [item objectForKey: @"object"];
-        if(obj != nil){
-            NSArray *attachs = [obj objectForKey: @"attachedObjects"];
-            if(attachs != nil && [attachs count] > 0){
-                NSDictionary *attach = [attachs objectAtIndex:1] ;
-                NSDictionary *mediaLink = [attach objectForKey:@"mediaLink"] ;
-                msg.msgAttach = [mediaLink objectForKey:@"url"] ;
-            }
+        NSArray *attachments = [item objectForKey: @"attachments"];
+        if(attachments != nil && [attachments count] > 0){
+            NSDictionary *attach = [attachments objectAtIndex:0] ;
+            msg.msgAttach = [attach objectForKey:@"url"] ;
         }
         [result addObject:msg];
     }
@@ -329,14 +328,10 @@
         msg.msgTime = [item objectForKey: @"created_at"];
         msg.msgTime = [msg.msgTime substringToIndex:19] ;
         
-        NSDictionary *obj = [item objectForKey: @"object"];
-        if(obj != nil){
-            NSArray *attachs = [obj objectForKey: @"attachedObjects"];
-            if(attachs != nil && [attachs count] > 0){
-                NSDictionary *attach = [attachs objectAtIndex:1] ;
-                NSDictionary *mediaLink = [attach objectForKey:@"mediaLink"] ;
-                msg.msgAttach = [mediaLink objectForKey:@"url"] ;
-            }
+        NSArray *attachments = [item objectForKey: @"attachments"];
+        if(attachments != nil && [attachments count] > 0){
+            NSDictionary *attach = [attachments objectAtIndex:0] ;
+            msg.msgAttach = [attach objectForKey:@"url"] ;
         }
         Share *latestShare = [self.listData objectAtIndex:0] ;
         if([latestShare.msgId intValue] < [msg.msgId intValue]){
@@ -380,14 +375,10 @@
         msg.msgTime = [item objectForKey: @"created_at"];
         msg.msgTime = [msg.msgTime substringToIndex:19] ;
         
-        NSDictionary *obj = [item objectForKey: @"object"];
-        if(obj != nil){
-            NSArray *attachs = [obj objectForKey: @"attachedObjects"];
-            if(attachs != nil && [attachs count] > 0){
-                NSDictionary *attach = [attachs objectAtIndex:1] ;
-                NSDictionary *mediaLink = [attach objectForKey:@"mediaLink"] ;
-                msg.msgAttach = [mediaLink objectForKey:@"url"] ;
-            }
+        NSArray *attachments = [item objectForKey: @"attachments"];
+        if(attachments != nil && [attachments count] > 0){
+            NSDictionary *attach = [attachments objectAtIndex:0] ;
+            msg.msgAttach = [attach objectForKey:@"url"] ;
         }
         [self.listData addObject:msg];
     }
@@ -433,7 +424,6 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"%d", buttonIndex);
     if(buttonIndex == 0){
         return ;
     }else if(buttonIndex == 1){
@@ -468,7 +458,6 @@
 
 - (void) downloadImageShareCell: (NSArray *)data
 {
-    NSLog(@"data size %d", data.count) ;
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
     for(int i = 0; i < appDelegate.imageCacheList.count; i++){
         Cache *cache = [appDelegate.imageCacheList objectAtIndex:i];
@@ -509,7 +498,6 @@
 
 - (void) downloadImageShareActor: (NSArray *)data
 {
-    NSLog(@"data size %d", data.count) ;
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
     for(int i = 0; i < appDelegate.imageCacheList.count; i++){
         Cache *cache = [appDelegate.imageCacheList objectAtIndex:i];

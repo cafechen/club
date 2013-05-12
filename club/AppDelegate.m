@@ -245,6 +245,14 @@
     NSLog(@"Goto Last Page End") ;
 }
 
+- (void)gotoLastPage4
+{
+    NSLog(@"Goto Last Page Start") ;
+    [self.navController4 popViewControllerAnimated:YES];
+    self.window.rootViewController = self.tabBarController;
+    NSLog(@"Goto Last Page End") ;
+}
+
 - (void)gotoLastTLPage
 {
     NSLog(@"Goto Last TL Page Start") ;
@@ -279,7 +287,24 @@
     }else{
         shareDetailController = [[ShareDetailController alloc] initWithNibName:@"ShareDetailController" bundle:nil];
     }
+    shareDetailController.navNum = 3 ;
     [self.navController3 pushViewController:shareDetailController animated:YES] ;
+    
+    self.window.rootViewController = self.tabBarController;
+    NSLog(@"Goto Share Detail Page End") ;
+}
+
+- (void)gotoShareDetailPage2
+{
+    NSLog(@"Goto Share Detail Start") ;
+    ShareDetailController *shareDetailController = nil ;
+    if(isIPhone5){
+        shareDetailController = [[ShareDetailController alloc] initWithNibName:@"ShareDetailController_iphone5" bundle:nil];
+    }else{
+        shareDetailController = [[ShareDetailController alloc] initWithNibName:@"ShareDetailController" bundle:nil];
+    }
+    shareDetailController.navNum = 4 ;
+    [self.navController4 pushViewController:shareDetailController animated:YES] ;
     
     self.window.rootViewController = self.tabBarController;
     NSLog(@"Goto Share Detail Page End") ;

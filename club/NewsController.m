@@ -156,8 +156,6 @@
 
 - (void) downloadImageAndCache: (NSArray *)data
 {
-    NSLog(@"data size %d %@", data.count, [data objectAtIndex:0]) ;
-    
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
     
     for(int i = 0; i < appDelegate.imageCacheList.count; i++){

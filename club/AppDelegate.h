@@ -32,6 +32,7 @@
 - (void)gotoLastPage1 ;
 - (void)gotoLastPage2 ;
 - (void)gotoLastPage3 ;
+- (void)gotoLastPage4 ;
 - (void)gotoIndexPage ;
 - (void)gotoNewsPage ;
 - (void)gotoNewsDetailPage ;
@@ -41,5 +42,6 @@
 - (void)gotoLoginPage ;
 - (void)gotoPersionPage ;
 - (void)gotoShareDetailPage ;
+- (void)gotoShareDetailPage2 ;
 
 @end

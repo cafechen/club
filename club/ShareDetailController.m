@@ -137,7 +137,15 @@
 - (IBAction) gotoLastPageButtonAction:(id)sender
 {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
-    [appDelegate gotoLastPage3] ;
+    switch (self.navNum) {
+        case 3:
+            [appDelegate gotoLastPage3] ;
+            break;
+        case 4:
+            [appDelegate gotoLastPage4] ;
+        default:
+            break;
+    }
 }
 
 - (void) downloadAvatarAndCache: (NSArray *)data
@@ -171,8 +179,6 @@
         Cache *cache = [appDelegate.imageCacheList objectAtIndex:i];
         if([cache.imageUrl isEqualToString:[data objectAtIndex:0]]){
             self.attactment = cache.imageCache ;
-            //增加鼠标点击事件
-            NSLog(@"增加鼠标点击事件") ;
             self.attachView.userInteractionEnabled = YES;
             UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBigImage:)];
             singleTap.view.tag = (int)self.attactment;
@@ -192,7 +198,6 @@
     [appDelegate.imageCacheList addObject:newCache];
     
     //增加鼠标点击事件
-    NSLog(@"增加鼠标点击事件") ;
     self.attachView.userInteractionEnabled = YES;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showBigImage:)];
     singleTap.view.tag = (int)self.attactment;
@@ -201,7 +206,6 @@
 
 - (void) showBigImage:(id)sender
 {
-    NSLog(@"Show Big Image") ;
     CGContextRef context = UIGraphicsGetCurrentContext();
     [UIView beginAnimations:nil context:context];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];

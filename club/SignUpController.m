@@ -196,8 +196,6 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"无法访问服务器，请检查您的网络！" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
-    
-    NSLog(@"%@", ret) ;
 }
 
 @end

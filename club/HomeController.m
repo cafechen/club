@@ -82,8 +82,6 @@
     
     NSDictionary *dict = [response objectFromJSONString];
     
-    NSLog(@"#### %@", dict) ;
-    
     self.personName.text = [dict objectForKey: @"screen_name"] ;
     
     [self downloadImageActor:[dict objectForKey: @"profile_image_url"]] ;
@@ -143,7 +141,7 @@
     
     appDelegate.currShare = (Share *)[listData objectAtIndex:row];
     
-    [appDelegate gotoShareDetailPage] ;
+    [appDelegate gotoShareDetailPage2] ;
     
     return nil;
 }
@@ -183,12 +181,7 @@
     
     [NSThread detachNewThreadSelector:@selector(downloadImageShareActor:) toTarget:self withObject:data];
     
-    NSLog(@"msgAttach %@", msg.msgAttach) ;
-    
     if(msg.msgAttach != nil && ![@"" isEqualToString:msg.msgAttach]){
-        NSLog(@"bbbbbbbbb") ;
-        //attachImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:attachUrl]];
-        //attachImage = [UIImage imageNamed:@"loading3.gif"] ;
         NSArray *data = [NSArray arrayWithObjects:msg.msgAttach,cell, nil];
         [NSThread detachNewThreadSelector:@selector(downloadImageShareCell:) toTarget:self withObject:data];
     }
@@ -206,17 +199,12 @@
     
     // 設置顯示榘形大小
     rect.size = size;
-    NSLog(@"%@", msg.msgBody) ;
-    NSLog(@"111 [%f][%f][%f][%f]", rect.origin.x, rect.origin.y, rect.size.height, rect.size.width) ;
-    NSLog(@"222 [%f][%f][%f][%f]", attachRect.origin.x, attachRect.origin.y, attachRect.size.height, attachRect.size.width) ;
-    NSLog(@"333 [%f][%f][%f][%f]", cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.height, cell.frame.size.width) ;
     // 重置列文本區域
     cell.bodyLabel.frame = rect;
     //cell.bodyView.frame = rect;
     cell.attachView.frame = CGRectMake(rect.origin.x, rect.origin.y + rect.size.height + 20, 80, 80);
     cell.body = [NSString stringWithFormat:@"%@", msg.msgBody] ;
     cell.title = msg.msgTitle ;
-    NSLog(@"TIME ********** %@", msg.msgTime) ;
     cell.time = msg.msgTime ;
     cell.userId = msg.msgUserId ;
     
@@ -225,9 +213,7 @@
     // 設置顯示字體(一定要和之前計算時使用字體一至)
     cell.bodyLabel.font = font;
     
-    NSLog(@"%@ %@", cell.body, cell.title) ;
-    
-	return cell;
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath
@@ -439,7 +425,6 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"%d", buttonIndex);
     if(buttonIndex == 0){
         return ;
     }else if(buttonIndex == 1){
@@ -474,7 +459,6 @@
 
 - (void) downloadImageShareCell: (NSArray *)data
 {
-    NSLog(@"data size %d", data.count) ;
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
     for(int i = 0; i < appDelegate.imageCacheList.count; i++){
         Cache *cache = [appDelegate.imageCacheList objectAtIndex:i];
@@ -515,7 +499,6 @@
 
 - (void) downloadImageShareActor: (NSArray *)data
 {
-    NSLog(@"data size %d", data.count) ;
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
     for(int i = 0; i < appDelegate.imageCacheList.count; i++){
         Cache *cache = [appDelegate.imageCacheList objectAtIndex:i];
