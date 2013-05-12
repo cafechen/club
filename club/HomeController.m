@@ -136,6 +136,15 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView
   willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSUInteger row = [indexPath row];
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate] ;
+    
+    appDelegate.currShare = (Share *)[listData objectAtIndex:row];
+    
+    [appDelegate gotoShareDetailPage] ;
+    
     return nil;
 }
 
@@ -290,15 +299,12 @@
         msg.msgTime = [item objectForKey: @"created_at"];
         msg.msgTime = [msg.msgTime substringToIndex:19] ;
         
-        NSDictionary *obj = [item objectForKey: @"object"];
-        if(obj != nil){
-            NSArray *attachs = [obj objectForKey: @"attachedObjects"];
-            if(attachs != nil && [attachs count] > 0){
-                NSDictionary *attach = [attachs objectAtIndex:1] ;
-                NSDictionary *mediaLink = [attach objectForKey:@"mediaLink"] ;
-                msg.msgAttach = [mediaLink objectForKey:@"url"] ;
-            }
+        NSArray *attachments = [item objectForKey: @"attachments"];
+        if(attachments != nil && [attachments count] > 0){
+            NSDictionary *attach = [attachments objectAtIndex:0] ;
+            msg.msgAttach = [attach objectForKey:@"url"] ;
         }
+        
         [result addObject:msg];
     }
     
@@ -336,14 +342,10 @@
         msg.msgTime = [item objectForKey: @"created_at"];
         msg.msgTime = [msg.msgTime substringToIndex:19] ;
         
-        NSDictionary *obj = [item objectForKey: @"object"];
-        if(obj != nil){
-            NSArray *attachs = [obj objectForKey: @"attachedObjects"];
-            if(attachs != nil && [attachs count] > 0){
-                NSDictionary *attach = [attachs objectAtIndex:1] ;
-                NSDictionary *mediaLink = [attach objectForKey:@"mediaLink"] ;
-                msg.msgAttach = [mediaLink objectForKey:@"url"] ;
-            }
+        NSArray *attachments = [item objectForKey: @"attachments"];
+        if(attachments != nil && [attachments count] > 0){
+            NSDictionary *attach = [attachments objectAtIndex:0] ;
+            msg.msgAttach = [attach objectForKey:@"url"] ;
         }
         Share *latestShare = [self.listData objectAtIndex:0] ;
         if([latestShare.msgId intValue] < [msg.msgId intValue]){
@@ -387,15 +389,12 @@
         msg.msgTime = [item objectForKey: @"created_at"];
         msg.msgTime = [msg.msgTime substringToIndex:19] ;
         
-        NSDictionary *obj = [item objectForKey: @"object"];
-        if(obj != nil){
-            NSArray *attachs = [obj objectForKey: @"attachedObjects"];
-            if(attachs != nil && [attachs count] > 0){
-                NSDictionary *attach = [attachs objectAtIndex:1] ;
-                NSDictionary *mediaLink = [attach objectForKey:@"mediaLink"] ;
-                msg.msgAttach = [mediaLink objectForKey:@"url"] ;
-            }
+        NSArray *attachments = [item objectForKey: @"attachments"];
+        if(attachments != nil && [attachments count] > 0){
+            NSDictionary *attach = [attachments objectAtIndex:0] ;
+            msg.msgAttach = [attach objectForKey:@"url"] ;
         }
+        
         [self.listData addObject:msg];
     }
 }
