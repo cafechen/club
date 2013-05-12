@@ -333,8 +333,12 @@
             NSDictionary *attach = [attachments objectAtIndex:0] ;
             msg.msgAttach = [attach objectForKey:@"url"] ;
         }
-        Share *latestShare = [self.listData objectAtIndex:0] ;
-        if([latestShare.msgId intValue] < [msg.msgId intValue]){
+        if(self.listData.count > 0){
+            Share *latestShare = [self.listData objectAtIndex:0] ;
+            if([latestShare.msgId intValue] < [msg.msgId intValue]){
+                [self.listData insertObject:msg atIndex:0];
+            }
+        }else{
             [self.listData insertObject:msg atIndex:0];
         }
     }

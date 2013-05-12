@@ -314,8 +314,12 @@
             share.msgAttach = [attach objectForKey:@"url"] ;
         }
         
-        Share *latestShare = [self.listData objectAtIndex:0] ;
-        if([latestShare.msgId intValue] < [share.msgId intValue]){
+        if(self.listData.count > 0){
+            Share *latestShare = [self.listData objectAtIndex:0] ;
+            if([latestShare.msgId intValue] < [share.msgId intValue]){
+                [self.listData insertObject:share atIndex:0];
+            }
+        }else{
             [self.listData insertObject:share atIndex:0];
         }
     }
